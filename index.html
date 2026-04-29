@@ -25,7 +25,7 @@
             scroll-behavior: smooth;
         }
 
-        /* Header dính trên đầu */
+        /* Header */
         .header {
             position: sticky;
             top: 0;
@@ -49,8 +49,32 @@
             animation: rainbow-text 3s linear infinite;
         }
 
+        /* THANH TÌM KIẾM Ở TRÊN */
+        .search-container {
+            padding: 20px 20px 10px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        #searchInput:focus {
+            border-color: #ff2d55;
+            box-shadow: 0 0 10px rgba(255, 45, 85, 0.2);
+        }
+
+        /* CHỮ ALL ITEMS Ở DƯỚI */
         .section-title {
-            padding: 25px 20px 15px;
+            padding: 10px 20px 15px;
         }
 
         .section-title h2 { font-size: 20px; margin: 0; font-weight: 700; color: #fff; }
@@ -72,11 +96,9 @@
 
         .item-card:active { transform: scale(0.97); }
 
-        /* PHẦN NỀN ẢNH ĐỔI MÀU LIÊN TỤC */
         .image-box {
             width: 100%;
             aspect-ratio: 1.2 / 1;
-            /* Dải màu cầu vồng cho nền */
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #561c94);
             background-size: 400% 400%;
             animation: gradient-bg 5s ease infinite;
@@ -85,7 +107,6 @@
             align-items: center;
         }
 
-        /* Hiệu ứng trượt màu nền */
         @keyframes gradient-bg {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -130,11 +151,15 @@
         <div style="color: white;">☰</div>
     </div>
 
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Tìm tên vật phẩm..." onkeyup="searchItem()">
+    </div>
+
     <div class="section-title">
         <h2>All Items</h2>
     </div>
 
-    <div class="grid-container">
+    <div class="grid-container" id="itemGrid">
         <div class="item-card">
             <div class="image-box">
                 <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938958892105739/5d9d7c932f69c220afd5b248c74ba066.png?ex=69f2fb30&is=69f1a9b0&hm=89d89a2f486a8686791b0114d16a01431cf78808f110258e417e657b8f72708a&" alt="Monkey Style">
@@ -149,11 +174,11 @@
 
         <div class="item-card">
             <div class="image-box">
-                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938931008507974/66c6629cb38610dd030654bcb36dced8.png?ex=69f2fb2a&is=69f1a9aa&hm=ba6c6eeb6489ab3eea9d936cccf9e94435d1bc9bf05677c108286eb410fe577b&" alt="Princess style ">
+                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938931008507974/66c6629cb38610dd030654bcb36dced8.png?ex=69f2fb2a&is=69f1a9aa&hm=ba6c6eeb6489ab3eea9d936cccf9e94435d1bc9bf05677c108286eb410fe577b&" alt="Princess style">
             </div>
             <div class="info-box">
                 <span class="tag">Style</span>
-                <div class="item-name">Princess style </div>
+                <div class="item-name">Princess style</div>
                 <div class="item-value">Value: <span>11.000</span></div>
                 <div class="item-old">Old: 9.700</div>
             </div>
@@ -173,7 +198,7 @@
 
         <div class="item-card">
             <div class="image-box">
-                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498947310871122022/b01999b81cc4701dd38d4ba51a8ffc52.png?ex=69f302f8&is=69f1b178&hm=e5f52ae702093b1b377dd223d07755885a38e0b10e01adbfe39d35f93df9b2f1&" alt="Item">
+                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498947310871122022/b01999b81cc4701dd38d4ba51a8ffc52.png?ex=69f302f8&is=69f1b178&hm=e5f52ae702093b1b377dd223d07755885a38e0b10e01adbfe39d35f93df9b2f1&" alt="Arctic">
             </div>
             <div class="info-box">
                 <span class="tag">Skin</span>
@@ -185,7 +210,7 @@
 
         <div class="item-card">
             <div class="image-box">
-                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498948672115707914/2b23f0abfb9b978248d01cd669837058.png?ex=69f3043c&is=69f1b2bc&hm=1bb72f2b07570784ece784ca4ba3df61e2a5700dbf4c2ec60341c7f9c060461b&" alt="Item">
+                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498948672115707914/2b23f0abfb9b978248d01cd669837058.png?ex=69f3043c&is=69f1b2bc&hm=1bb72f2b07570784ece784ca4ba3df61e2a5700dbf4c2ec60341c7f9c060461b&" alt="Celestial Wings">
             </div>
             <div class="info-box">
                 <span class="tag">Aura</span>
@@ -197,7 +222,7 @@
 
         <div class="item-card">
             <div class="image-box">
-                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498951637841215518/e5520dc6533b59136756a2eaa58f472b.png?ex=69f306ff&is=69f1b57f&hm=afdccfea68d60824622f018750854f6807bac29f3e2bbe735754769709e0054b&" alt="Item">
+                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498951637841215518/e5520dc6533b59136756a2eaa58f472b.png?ex=69f306ff&is=69f1b57f&hm=afdccfea68d60824622f018750854f6807bac29f3e2bbe735754769709e0054b&" alt="LipSmash">
             </div>
             <div class="info-box">
                 <span class="tag">Aura</span>
@@ -209,7 +234,7 @@
 
         <div class="item-card">
             <div class="image-box">
-                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498960008392605767/9a223c3b0772c2c0dceba6be69072734_2.png?ex=69f30ecb&is=69f1bd4b&hm=e061385f113c9c0cad864ed2e3b34a7d26b0269d6f59fa7c0166b4e606e256ec&" alt="Item">
+                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498960008392605767/9a223c3b0772c2c0dceba6be69072734_2.png?ex=69f30ecb&is=69f1bd4b&hm=e061385f113c9c0cad864ed2e3b34a7d26b0269d6f59fa7c0166b4e606e256ec&" alt="Bonk Style">
             </div>
             <div class="info-box">
                 <span class="tag">Style</span>
@@ -221,7 +246,7 @@
 
         <div class="item-card">
             <div class="image-box">
-                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498961414977749083/9a223c3b0772c2c0dceba6be69072734.png?ex=69f3101a&is=69f1be9a&hm=39a3403922e1880bcd1cc8086c1f011cac189df6eb8b33ce73894f0c01b8817f&" alt="Item">
+                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498961414977749083/9a223c3b0772c2c0dceba6be69072734.png?ex=69f3101a&is=69f1be9a&hm=39a3403922e1880bcd1cc8086c1f011cac189df6eb8b33ce73894f0c01b8817f&" alt="Elf Style">
             </div>
             <div class="info-box">
                 <span class="tag">Style</span>
@@ -233,7 +258,7 @@
 
         <div class="item-card">
             <div class="image-box">
-                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498966867266764841/1f5c9c97731f782b83f50d535b1d628c.png?ex=69f3152e&is=69f1c3ae&hm=f3f419866be95e9b0a3e8e839cca01e7e891117de952c02ae3b860b6136dc03f&" alt="Item">
+                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498966867266764841/1f5c9c97731f782b83f50d535b1d628c.png?ex=69f3152e&is=69f1c3ae&hm=f3f419866be95e9b0a3e8e839cca01e7e891117de952c02ae3b860b6136dc03f&" alt="Blood Reaver">
             </div>
             <div class="info-box">
                 <span class="tag">Skin</span>
@@ -245,7 +270,7 @@
 
         <div class="item-card">
             <div class="image-box">
-                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498968743701774386/d352bcae62ef926c07436716ca738917.png?ex=69f316ed&is=69f1c56d&hm=de2d7c0d284ed8f7d1bdb3ca4c4f828b64956c13418f0abe7027a992754d24d5&" alt="Item">
+                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498968743701774386/d352bcae62ef926c07436716ca738917.png?ex=69f316ed&is=69f1c56d&hm=de2d7c0d284ed8f7d1bdb3ca4c4f828b64956c13418f0abe7027a992754d24d5&" alt="Icebreaker Style">
             </div>
             <div class="info-box">
                 <span class="tag">Style</span>
@@ -257,7 +282,7 @@
 
         <div class="item-card">
             <div class="image-box">
-                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498970184893992990/b656c82d83e3dcac497aff034a9e12a4.png?ex=69f31845&is=69f1c6c5&hm=2119e94859b1bd612e30f482913c3117bf6cee95a3b03a629240af62670550c4&" alt="Item">
+                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498970184893992990/b656c82d83e3dcac497aff034a9e12a4.png?ex=69f31845&is=69f1c6c5&hm=2119e94859b1bd612e30f482913c3117bf6cee95a3b03a629240af62670550c4&" alt="Spiderlord">
             </div>
             <div class="info-box">
                 <span class="tag">Skin</span>
@@ -269,7 +294,7 @@
 
         <div class="item-card">
             <div class="image-box">
-                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498980835850719332/8cdfc5dbcee53d8094bae03297c4d4e6.png?ex=69f32230&is=69f1d0b0&hm=1f3d6bd133119f1bf0deea8a2d2c641a07932b4d6c25e3156786ce30edb781a0&" alt="Item">
+                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498980835850719332/8cdfc5dbcee53d8094bae03297c4d4e6.png?ex=69f32230&is=69f1d0b0&hm=1f3d6bd133119f1bf0deea8a2d2c641a07932b4d6c25e3156786ce30edb781a0&" alt="Omen">
             </div>
             <div class="info-box">
                 <span class="tag">Skin</span>
@@ -278,8 +303,24 @@
                 <div class="item-old">Old: 7.000</div>
             </div>
         </div>
-
     </div>
+
+    <script>
+        function searchItem() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('item-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let name = cards[i].getElementsByClassName('item-name')[0].innerText.toLowerCase();
+                // Nếu tìm thấy tên hoặc nếu ô tìm kiếm trống, hiển thị lại card
+                if (name.includes(input)) {
+                    cards[i].style.display = "block";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>
