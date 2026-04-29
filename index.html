@@ -65,7 +65,15 @@
             max-width: 800px;
         }
 
-        .item-card {
+        .item-card {.item-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Khi chạm tay vào (trên điện thoại) nó sẽ hơi nhỏ lại một xíu cảm giác rất thật */
+.item-card:active {
+    transform: scale(0.95);
+}
+
             background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
