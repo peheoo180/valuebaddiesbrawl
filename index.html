@@ -7,164 +7,171 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <style>
         :root {
-            --bg-color: #050a18;
+            --bg-dark: #050a18;
             --card-bg: #0d162d;
             --accent-purple: #561c94;
             --text-main: #ffffff;
             --text-sub: #8a99b1;
         }
 
-        /* Giúp vuốt lên xuống mượt mà như app */
+        /* Vuốt mượt như Facebook/TikTok */
         html, body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-dark);
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             overflow-x: hidden;
-            scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
 
-        /* Header dính chặt ở trên khi vuốt */
+        /* Header xịn với chữ Baddies Brawl Value */
         .header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: rgba(5, 10, 24, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 15px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(5, 10, 24, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .header h1 { 
+            font-size: 18px; 
+            margin: 0; 
+            font-weight: 800; 
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, #ff2d55, #561c94, #00d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             animation: rainbow-text 3s linear infinite;
         }
 
-        /* Container chứa các ô vật phẩm */
+        .section-title {
+            padding: 25px 20px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title h2 { font-size: 20px; margin: 0; font-weight: 700; color: #fff; }
+        .view-all { color: var(--text-sub); font-size: 12px; text-decoration: none; }
+
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
+            gap: 12px;
+            padding: 0 15px 20px;
         }
 
-        /* Ô vật phẩm với hiệu ứng 7 sắc cầu vồng */
         .item-card {
             background: var(--card-bg);
-            border-radius: 15px;
+            border-radius: 18px;
             overflow: hidden;
-            position: relative;
             border: 2px solid transparent;
             animation: rainbow-border 4s linear infinite;
             transition: transform 0.2s ease;
-            touch-action: none; /* Quan trọng để kéo thả trên điện thoại */
+            touch-action: pan-y;
         }
 
-        .item-card:active {
-            transform: scale(0.95);
-        }
+        .item-card:active { transform: scale(0.96); }
 
-        /* Vùng chứa ảnh */
         .image-box {
             width: 100%;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 1.2 / 1;
+            background: linear-gradient(135deg, #561c94, #2a0e4a);
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(180deg, #561c94, #1a0a2e);
         }
 
-        .image-box img {
-            width: 85%;
-            height: 85%;
-            object-fit: contain;
-            pointer-events: none;
+        .image-box img { width: 80%; height: 80%; object-fit: contain; }
+
+        .info-box { padding: 12px; }
+        
+        .tag {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-sub);
+            font-size: 9px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 6px;
+            text-transform: uppercase;
         }
 
-        /* Thông tin vật phẩm */
-        .info-box {
-            padding: 12px;
-            background: var(--card-bg);
-        }
-
-        .item-name {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
+        .item-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: #fff; }
         .item-value { font-size: 12px; color: var(--text-sub); }
-        .item-value span { color: #ffd700; font-weight: bold; }
-        .item-old { font-size: 12px; color: #ff2d55; font-weight: bold; margin-top: 2px; }
+        .item-value span { color: #ffd700; font-weight: 600; }
+        .item-old { font-size: 12px; color: #ff2d55; font-weight: 600; margin-top: 2px; }
 
-        /* Animation cho 7 sắc cầu vồng */
         @keyframes rainbow-border {
-            0% { border-color: #ff0000; box-shadow: 0 0 5px #ff0000; }
-            25% { border-color: #ffd700; box-shadow: 0 0 5px #ffd700; }
-            50% { border-color: #00ff00; box-shadow: 0 0 5px #00ff00; }
-            75% { border-color: #00d2ff; box-shadow: 0 0 5px #00d2ff; }
-            100% { border-color: #ff0000; box-shadow: 0 0 5px #ff0000; }
+            0% { border-color: #ff0000; }
+            33% { border-color: #00ff00; }
+            66% { border-color: #00d2ff; }
+            100% { border-color: #ff0000; }
         }
 
         @keyframes rainbow-text {
-            0% { color: #ff0000; }
-            33% { color: #00ff00; }
-            66% { color: #00d2ff; }
-            100% { color: #ff0000; }
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
         }
+
+        .sortable-ghost { opacity: 0.3; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>Baddies Brawl Value 🌸</h1>
+        <h1>BADDIES BRAWL VALUE 🌸</h1>
+        <div style="color: white;">☰</div>
     </div>
 
-    <div class="grid-container" id="value-grid">
+    <div class="section-title">
+        <h2>Latest Weapons</h2>
+        <a href="#" class="view-all">View All ></a>
+    </div>
+
+    <div class="grid-container draggable-zone">
         <div class="item-card">
             <div class="image-box">
-                <img src="https://cdn.discordapp.com/attachments/1484887651881451643/1498917850864291991/5d9d7c932f69c220afd5b248c74ba066.png?ex=69f2e788&is=69f19608&hm=5f0074687d49d29e0e68e662d74db0c27eca962dc82a238f38f58027489c2e47&" alt="Monkey Style">
+                <img src="https://via.placeholder.com/150?text=Weapon" alt="Weapon">
             </div>
             <div class="info-box">
+                <span class="tag">Sword</span>
+                <div class="item-name">Sakura Sword</div>
+                <div class="item-value">Value: <span>1,000</span></div>
+                <div class="item-old">Old: 800</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box" style="background: linear-gradient(45deg, #ff3e3e, #ffb800, #561c94);">
+                <img src="https://via.placeholder.com/150?text=Monkey" alt="Monkey">
+            </div>
+            <div class="info-box">
+                <span class="tag">Style</span>
                 <div class="item-name">Monkey Style</div>
                 <div class="item-value">Value: <span>1,500</span></div>
                 <div class="item-old">Old: 1,200</div>
             </div>
         </div>
-
-        <div class="item-card">
-            <div class="image-box">
-                <img src="https://via.placeholder.com/150/561c94/ffffff?text=Sakura" alt="Sakura">
-            </div>
-            <div class="info-box">
-                <div class="item-name">Sakura Set</div>
-                <div class="item-value">Value: <span>2,000</span></div>
-                <div class="item-old">Old: 1,800</div>
-            </div>
-        </div>
-
-        </div>
+    </div>
 
     <script>
-        // Kích hoạt kéo thả mượt mà
-        const grid = document.getElementById('value-grid');
-        new Sortable(grid, {
-            animation: 150,
-            delay: 100, // Nhấn giữ 0.1s để kéo, tránh nhầm khi cuộn trang
-            delayOnTouchOnly: true,
-            ghostClass: 'sortable-ghost'
+        document.querySelectorAll('.draggable-zone').forEach(zone => {
+            new Sortable(zone, {
+                animation: 150,
+                delay: 150,
+                delayOnTouchOnly: true,
+                ghostClass: 'sortable-ghost'
+            });
         });
     </script>
+
 </body>
 </html>
