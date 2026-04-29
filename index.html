@@ -65,7 +65,16 @@
             max-width: 800px;
         }
 
-        .item-card {.item-card {
+        .item-card {.item-card {hidden;
+    border: 2px solid #ff2d55; /* Viền mặc định */
+    
+    /* Kích hoạt hiệu ứng 7 sắc cầu vồng chạy liên tục */
+    animation: rainbow-border 3s linear infinite;
+    
+    transition: transform 0.2s ease;
+    cursor: grab;
+    touch-action: none;
+                }
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
