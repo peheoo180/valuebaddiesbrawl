@@ -71,7 +71,26 @@
 
         .item-card:active { transform: scale(0.97); }
 
-        .image-box {
+        .image-box {.image-box {
+    width: 100%;
+    aspect-ratio: 1.2 / 1;
+    /* Nền đổi màu chuyển động */
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #561c94);
+    background-size: 400% 400%;
+    animation: gradient-bg 5s ease infinite;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hiệu ứng làm cho màu nền nó trượt đi trượt lại */
+@keyframes gradient-bg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
             width: 100%;
             aspect-ratio: 1.2 / 1;
             background: linear-gradient(135deg, #561c94, #2a0e4a);
