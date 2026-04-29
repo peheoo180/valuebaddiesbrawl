@@ -2,123 +2,126 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Baddies Brawl Value 🌸</title>
-
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <style>
         :root {
             --bg-color: #050a18;
             --card-bg: #0d162d;
-            --accent-pink: #ff2d55;
-            --accent-blue: ##561c94;
+            --accent-purple: #561c94;
             --text-main: #ffffff;
             --text-sub: #8a99b1;
         }
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
+        /* Giúp vuốt lên xuống mượt mà như app */
+        html, body {
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
+        /* Header dính chặt ở trên khi vuốt */
         .header {
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(5, 10, 24, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            text-align: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .header h1 { 
-            font-size: 22px; 
-            margin: 0; 
-            background: linear-gradient(to right, #ff2d55, #ffb800);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .header h1 {
+            margin: 0;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: rainbow-text 3s linear infinite;
         }
 
-        .section-title {
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px 0;
-        }
-
-        .section-title h2 { font-size: 20px; margin: 0; }
-        .view-all { color: var(--accent-blue); text-decoration: none; font-size: 14px; }
-
+        /* Container chứa các ô vật phẩm */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            width: 100%;
+            gap: 15px;
+            padding: 20px;
             max-width: 800px;
+            margin: 0 auto;
         }
 
-        .item-card {.item-card {hidden;
-    border: 2px solid #ff2d55; /* Viền mặc định */
-    
-    /* Kích hoạt hiệu ứng 7 sắc cầu vồng chạy liên tục */
-    animation: rainbow-border 3s linear infinite;
-    
-    transition: transform 0.2s ease;
-    cursor: grab;
-    touch-action: none;
-                }
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Khi chạm tay vào (trên điện thoại) nó sẽ hơi nhỏ lại một xíu cảm giác rất thật */
-.item-card:active {
-    transform: scale(0.95);
-}
-
+        /* Ô vật phẩm với hiệu ứng 7 sắc cầu vồng */
+        .item-card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            border: 2px solid transparent;
+            animation: rainbow-border 4s linear infinite;
+            transition: transform 0.2s ease;
+            touch-action: none; /* Quan trọng để kéo thả trên điện thoại */
         }
 
+        .item-card:active {
+            transform: scale(0.95);
+        }
+
+        /* Vùng chứa ảnh */
         .image-box {
             width: 100%;
             aspect-ratio: 1 / 1;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: linear-gradient(180deg, #561c94, #1a0a2e);
         }
 
-        /* Màu nền gradient tím giống ảnh của ông */
-        .bg-purple { background: linear-gradient(180deg, #8e2de2, #4a00e0); }
-        .bg-rainbow { background: linear-gradient(45deg, #ff3e3e, #ffb800, #00d2ff); }
-
-        .image-box img { width: 85%; height: 85%; object-fit: contain; }
-
-        .info-box { padding: 10px; }
-        .tag {
-            font-size: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: var(--text-sub);
+        .image-box img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+            pointer-events: none;
         }
 
-        .item-name { font-size: 14px; font-weight: bold; margin: 6px 0 4px 0; }
-        .item-value { font-size: 12px; color: var(--text-sub); margin-bottom: 2px; }
-        .item-value span { color: #ffd700; }
-        .item-old { font-size: 12px; color: #ff2d55; font-weight: bold; } /* Chữ Old màu hồng đỏ cho nổi */
+        /* Thông tin vật phẩm */
+        .info-box {
+            padding: 12px;
+            background: var(--card-bg);
+        }
 
-        @media (max-width: 480px) {
-            .grid-container { grid-template-columns: repeat(2, 1fr); }
+        .item-name {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .item-value { font-size: 12px; color: var(--text-sub); }
+        .item-value span { color: #ffd700; font-weight: bold; }
+        .item-old { font-size: 12px; color: #ff2d55; font-weight: bold; margin-top: 2px; }
+
+        /* Animation cho 7 sắc cầu vồng */
+        @keyframes rainbow-border {
+            0% { border-color: #ff0000; box-shadow: 0 0 5px #ff0000; }
+            25% { border-color: #ffd700; box-shadow: 0 0 5px #ffd700; }
+            50% { border-color: #00ff00; box-shadow: 0 0 5px #00ff00; }
+            75% { border-color: #00d2ff; box-shadow: 0 0 5px #00d2ff; }
+            100% { border-color: #ff0000; box-shadow: 0 0 5px #ff0000; }
+        }
+
+        @keyframes rainbow-text {
+            0% { color: #ff0000; }
+            33% { color: #00ff00; }
+            66% { color: #00d2ff; }
+            100% { color: #ff0000; }
         }
     </style>
 </head>
@@ -128,69 +131,40 @@
         <h1>Baddies Brawl Value 🌸</h1>
     </div>
 
-    <div class="section-title">
-        <h2>Latest Items</h2>
-        <a href="#" class="view-all">View All ></a>
-    </div>
-
-    <div class="grid-container">
+    <div class="grid-container" id="value-grid">
         <div class="item-card">
-            <div class="image-box bg-purple">
+            <div class="image-box">
                 <img src="https://cdn.discordapp.com/attachments/1484887651881451643/1498917850864291991/5d9d7c932f69c220afd5b248c74ba066.png?ex=69f2e788&is=69f19608&hm=5f0074687d49d29e0e68e662d74db0c27eca962dc82a238f38f58027489c2e47&" alt="Monkey Style">
             </div>
             <div class="info-box">
-                <span class="tag">Style</span>
                 <div class="item-name">Monkey Style</div>
-                <div class="item-value">Value: <span>8.500</span></div>
-                <div class="item-old">Old: <span>-</span></div>
+                <div class="item-value">Value: <span>1,500</span></div>
+                <div class="item-old">Old: 1,200</div>
             </div>
         </div>
 
         <div class="item-card">
-            <div class="image-box bg-purple">
-                <img src="https://via.placeholder.com/150?text=Elf" alt="Elf Style">
+            <div class="image-box">
+                <img src="https://via.placeholder.com/150/561c94/ffffff?text=Sakura" alt="Sakura">
             </div>
             <div class="info-box">
-                <span class="tag">Style</span>
-                <div class="item-name">Elf Style</div>
-                <div class="item-value">Value: <span>3.520</span></div>
-                <div class="item-old">Old: <span>-</span></div>
+                <div class="item-name">Sakura Set</div>
+                <div class="item-value">Value: <span>2,000</span></div>
+                <div class="item-old">Old: 1,800</div>
             </div>
         </div>
 
-        <div class="item-card">
-            <div class="image-box bg-rainbow">
-                <img src="https://via.placeholder.com/150?text=Sakura" alt="Sakura Set">
-            </div>
-            <div class="info-box">
-                <span class="tag">Style</span>
-                <div class="item-name">Zombie Style</div>
-                <div class="item-value">Value: <span>9.900</span></div>
-                <div class="item-old">Old: <span>12.700</span></div>
-            </div>
         </div>
 
-        <div class="item-card">
-            <div class="image-box bg-rainbow">
-                <img src="https://via.placeholder.com/150?text=Gavel" alt="Price Gavel">
-            </div>
-            <div class="info-box">
-                <span class="tag">Style</span>
-                <div class="item-name">Price Gavel</div>
-                <div class="item-value">Value: <span>-</span></div>
-                <div class="item-old">Old: <span>-</span></div>
-            </div>
-        </div>
-    </div>
-
-</body><script>
-    // Lệnh này tìm cái bảng chứa vật phẩm và cho phép kéo thả
-    const grid = document.querySelector('.grid-container');
-    new Sortable(grid, {
-        animation: 150, // Hiệu ứng mượt khi đổi chỗ
-        delay: 100,     // Nhấn giữ 0.1 giây để bắt đầu kéo (tránh bị nhầm khi cuộn trang)
-        delayOnTouchOnly: true
-    });
-</script>
-
+    <script>
+        // Kích hoạt kéo thả mượt mà
+        const grid = document.getElementById('value-grid');
+        new Sortable(grid, {
+            animation: 150,
+            delay: 100, // Nhấn giữ 0.1s để kéo, tránh nhầm khi cuộn trang
+            delayOnTouchOnly: true,
+            ghostClass: 'sortable-ghost'
+        });
+    </script>
+</body>
 </html>
