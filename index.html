@@ -3,50 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Value Baddies Brawl</title>
+    <title>Value Baddies Brawl ✨</title>
     <style>
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #1a1a1a;
-            color: white;
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
             margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
         }
-        .container { width: 100%; max-width: 400px; text-align: center; }
-        h1 { color: #ff3e3e; text-transform: uppercase; }
-        .link-btn {
-            display: block;
-            background: #333;
-            color: white;
-            padding: 15px;
-            margin: 10px 0;
-            text-decoration: none;
-            border-radius: 8px;
-            border: 1px solid #444;
-            transition: 0.3s;
-        }
-        .link-btn:hover { background: #ff3e3e; border-color: #fff; }
-        .img-display {
+
+        .container {
             width: 100%;
-            margin-top: 20px;
-            border: 2px solid #ff3e3e;
-            border-radius: 10px;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        /* Avatar bọc vòng sáng */
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid #ff2d55;
+            box-shadow: 0 0 20px rgba(255, 45, 85, 0.5);
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+            background: linear-gradient(to right, #ff2d55, #ffb800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .desc {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        /* Nút bấm kiểu Glassmorphism */
+        .link-card {
+            display: block;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            border-color: #ff2d55;
+        }
+
+        /* Chỗ đè hình ảnh cực xịn */
+        .image-container {
+            margin-top: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .image-container img {
+            width: 100%;
+            display: block;
+            transition: 0.5s;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.7rem;
+            color: #444;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Value Baddies Brawl ✨</h1>
-        <p>Chào mừng ông đến với trang giá trị vật phẩm!</p>
-        
-        <a href="https://www.roblox.com/" class="link-btn">Chơi Game Trên Roblox</a>
-        <a href="#" class="link-btn">Bảng Giá Vật Phẩm</a>
-        <a href="#" class="link-btn">Discord Cộng Đồng</a>
 
-        <img src="https://via.placeholder.com/400x200/ff3e3e/ffffff?text=Baddies+Brawl+Image" class="img-display" alt="Game Image">
+    <div class="container">
+        <img src="https://via.placeholder.com/150" alt="Avatar" class="avatar">
+        
+        <h1>Nem • Value Baddies</h1>
+        <p class="desc">Cập nhật giá trị vật phẩm Roblox mới nhất</p>
+
+        <a href="#" class="link-card">🎮 Play Baddies Brawl</a>
+        <a href="#" class="link-card">📈 Item Value List</a>
+        <a href="#" class="link-card">💬 Join Discord</a>
+        <a href="#" class="link-card">🎵 TikTok Showcase</a>
+
+        <div class="image-container">
+            <img src="https://via.placeholder.com/600x350/222/fff?text=Baddies+Brawl+Preview" alt="Game Preview">
+        </div>
+
+        <div class="footer">Made by Nem • 2026</div>
     </div>
+
 </body>
 </html>
+
