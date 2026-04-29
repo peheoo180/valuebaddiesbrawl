@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Card</title>
+    <style>
+        /* Tùy chỉnh màu sắc ở đây */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* Avatar */
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        h1 { font-size: 1.5rem; margin-bottom: 5px; }
+        p { color: #ccc; margin-bottom: 25px; }
+
+        /* Nút bấm - Ông muốn thêm bao nhiêu tùy thích */
+        .link {
+            display: block;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .link:hover {
+            background: white;
+            color: #24243e;
+            transform: scale(1.05);
+        }
+
+        /* Phần đè hình ảnh ông muốn */
+        .image-box {
+            margin-top: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px dashed #666;
+        }
+
+        .image-box img {
+            width: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="https://via.placeholder.com/150" alt="Avatar" class="avatar">
+        
+        <h1>Tên Của Ông</h1>
+        <p>Developer & Designer</p>
+
+        <a href="#" class="link">Facebook của tui</a>
+        <a href="#" class="link">Dự án Roblox</a>
+        <a href="#" class="link">Kênh YouTube</a>
+        <a href="#" class="link">TikTok</a>
+
+        <div class="image-box">
+            <img src="https://via.placeholder.com/400x200" alt="My Project">
+        </div>
+    </div>
+
+</body>
+</html>
