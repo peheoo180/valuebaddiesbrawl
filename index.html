@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nem - Value Baddies Brawl</title>
+    <title>Baddies Brawl Value 🌸</title>
     <style>
         :root {
             --bg-color: #050a18;
@@ -15,7 +15,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -29,12 +29,20 @@
             width: 100%;
             max-width: 800px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .header h1 { font-size: 24px; margin: 0; }
+        .header h1 { 
+            font-size: 22px; 
+            margin: 0; 
+            background: linear-gradient(to right, #ff2d55, #ffb800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
         .section-title {
             width: 100%;
@@ -45,57 +53,51 @@
             margin: 20px 0;
         }
 
-        .section-title h2 { font-size: 22px; margin: 0; }
+        .section-title h2 { font-size: 20px; margin: 0; }
         .view-all { color: var(--accent-blue); text-decoration: none; font-size: 14px; }
 
-        /* Grid chia ô giống trong ảnh */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Chia 2 cột trên mobile */
-            gap: 15px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
             width: 100%;
             max-width: 800px;
         }
 
-        /* Thẻ vật phẩm */
         .item-card {
             background: var(--card-bg);
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            transition: transform 0.2s;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
-        .item-card:hover { transform: translateY(-5px); }
 
         .image-box {
             width: 100%;
             aspect-ratio: 1 / 1;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); /* Màu nền ảnh */
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
         }
 
-        /* Gradient cho từng loại ảnh khác nhau */
+        /* Màu nền gradient tím giống ảnh của ông */
         .bg-purple { background: linear-gradient(180deg, #8e2de2, #4a00e0); }
         .bg-rainbow { background: linear-gradient(45deg, #ff3e3e, #ffb800, #00d2ff); }
 
-        .image-box img { width: 80%; height: 80%; object-fit: contain; }
+        .image-box img { width: 85%; height: 85%; object-fit: contain; }
 
-        .info-box { padding: 12px; }
+        .info-box { padding: 10px; }
         .tag {
             font-size: 10px;
             background: rgba(255, 255, 255, 0.1);
-            padding: 2px 8px;
-            border-radius: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
             color: var(--text-sub);
         }
 
-        .item-name { font-size: 14px; font-weight: bold; margin: 8px 0 4px 0; }
-        .item-value { font-size: 12px; color: var(--text-sub); }
+        .item-name { font-size: 14px; font-weight: bold; margin: 6px 0 4px 0; }
+        .item-value { font-size: 12px; color: var(--text-sub); margin-bottom: 2px; }
         .item-value span { color: #ffd700; }
+        .item-old { font-size: 12px; color: #ff2d55; font-weight: bold; } /* Chữ Old màu hồng đỏ cho nổi */
 
         @media (max-width: 480px) {
             .grid-container { grid-template-columns: repeat(2, 1fr); }
@@ -105,8 +107,7 @@
 <body>
 
     <div class="header">
-        <h1>Nem Value</h1>
-        <div style="font-size: 24px;">☰</div>
+        <h1>Baddies Brawl Value 🌸</h1>
     </div>
 
     <div class="section-title">
@@ -116,18 +117,6 @@
 
     <div class="grid-container">
         <div class="item-card">
-            <div class="image-box bg-rainbow">
-                <img src="https://via.placeholder.com/150?text=Sakura" alt="Sakura Sword">
-            </div>
-            <div class="info-box">
-                <span class="tag">Weapon</span>
-                <div class="item-name">Sakura Sword</div>
-                <div class="item-value">Value: <span>-</span></div>
-                <div class="item-value">RAP: <span style="color: #ff2d55;">1</span></div>
-            </div>
-        </div>
-
-        <div class="item-card">
             <div class="image-box bg-purple">
                 <img src="https://via.placeholder.com/150?text=Monkey" alt="Monkey Style">
             </div>
@@ -135,7 +124,7 @@
                 <span class="tag">Style</span>
                 <div class="item-name">Monkey Style</div>
                 <div class="item-value">Value: <span>-</span></div>
-                <div class="item-value">RAP: <span>-</span></div>
+                <div class="item-old">Old: <span>-</span></div>
             </div>
         </div>
 
@@ -146,24 +135,35 @@
             <div class="info-box">
                 <span class="tag">Style</span>
                 <div class="item-name">Elf Style</div>
-                <div class="item-value">Value: <3.400>-</span></div>
-                <div class="item-value">Old: <4.500>-</span></div>
+                <div class="item-value">Value: <span>-</span></div>
+                <div class="item-old">Old: <span>-</span></div>
             </div>
         </div>
 
         <div class="item-card">
             <div class="image-box bg-rainbow">
-                <img src="https://via.placeholder.com/150?text=Hammer" alt="Gavel">
+                <img src="https://via.placeholder.com/150?text=Sakura" alt="Sakura Set">
+            </div>
+            <div class="info-box">
+                <span class="tag">Weapon</span>
+                <div class="item-name">Sakura Set</div>
+                <div class="item-value">Value: <span>-</span></div>
+                <div class="item-old">Old: <span>-</span></div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box bg-rainbow">
+                <img src="https://via.placeholder.com/150?text=Gavel" alt="Price Gavel">
             </div>
             <div class="info-box">
                 <span class="tag">Sledgehammer</span>
                 <div class="item-name">Price Gavel</div>
                 <div class="item-value">Value: <span>-</span></div>
-                <div class="item-value">RAP: <span>-</span></div>
+                <div class="item-old">Old: <span>-</span></div>
             </div>
         </div>
     </div>
 
 </body>
 </html>
-
