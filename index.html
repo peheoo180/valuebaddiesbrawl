@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Baddies Brawl Value 🌸</title>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <style>
         :root {
             --bg-dark: #050a18;
@@ -12,9 +11,9 @@
             --accent-purple: #561c94;
             --text-main: #ffffff;
             --text-sub: #8a99b1;
+            --border-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Vuốt mượt như Facebook/TikTok */
         html, body {
             background-color: var(--bg-dark);
             color: var(--text-main);
@@ -26,7 +25,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Header xịn với chữ Baddies Brawl Value */
         .header {
             position: sticky;
             top: 0;
@@ -37,14 +35,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .header h1 { 
             font-size: 18px; 
             margin: 0; 
             font-weight: 800; 
-            letter-spacing: 0.5px;
             background: linear-gradient(to right, #ff2d55, #561c94, #00d2ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -53,32 +50,26 @@
 
         .section-title {
             padding: 25px 20px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .section-title h2 { font-size: 20px; margin: 0; font-weight: 700; color: #fff; }
-        .view-all { color: var(--text-sub); font-size: 12px; text-decoration: none; }
 
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            padding: 0 15px 20px;
+            padding: 0 15px 30px;
         }
 
         .item-card {
             background: var(--card-bg);
             border-radius: 18px;
             overflow: hidden;
-            border: 2px solid transparent;
-            animation: rainbow-border 4s linear infinite;
+            border: 1px solid var(--border-color);
             transition: transform 0.2s ease;
-            touch-action: pan-y;
         }
 
-        .item-card:active { transform: scale(0.96); }
+        .item-card:active { transform: scale(0.97); }
 
         .image-box {
             width: 100%;
@@ -89,7 +80,12 @@
             align-items: center;
         }
 
-        .image-box img { width: 80%; height: 80%; object-fit: contain; }
+        .image-box img { 
+            width: 80%; 
+            height: 80%; 
+            object-fit: contain; 
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+        }
 
         .info-box { padding: 12px; }
         
@@ -104,24 +100,15 @@
             text-transform: uppercase;
         }
 
-        .item-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: #fff; }
+        .item-name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .item-value { font-size: 12px; color: var(--text-sub); }
         .item-value span { color: #ffd700; font-weight: 600; }
         .item-old { font-size: 12px; color: #ff2d55; font-weight: 600; margin-top: 2px; }
-
-        @keyframes rainbow-border {
-            0% { border-color: #ff0000; }
-            33% { border-color: #00ff00; }
-            66% { border-color: #00d2ff; }
-            100% { border-color: #ff0000; }
-        }
 
         @keyframes rainbow-text {
             0% { filter: hue-rotate(0deg); }
             100% { filter: hue-rotate(360deg); }
         }
-
-        .sortable-ghost { opacity: 0.3; }
     </style>
 </head>
 <body>
@@ -132,26 +119,13 @@
     </div>
 
     <div class="section-title">
-        <h2>Latest Weapons</h2>
-        <a href="#" class="view-all">View All ></a>
+        <h2>Latest Items</h2>
     </div>
 
-    <div class="grid-container draggable-zone">
+    <div class="grid-container">
         <div class="item-card">
             <div class="image-box">
-                <img src="https://via.placeholder.com/150?text=Weapon" alt="Weapon">
-            </div>
-            <div class="info-box">
-                <span class="tag">Sword</span>
-                <div class="item-name">Sakura Sword</div>
-                <div class="item-value">Value: <span>1,000</span></div>
-                <div class="item-old">Old: 800</div>
-            </div>
-        </div>
-
-        <div class="item-card">
-            <div class="image-box" style="background: linear-gradient(45deg, #ff3e3e, #ffb800, #561c94);">
-                <img src="https://via.placeholder.com/150?text=Monkey" alt="Monkey">
+                <img src="https://cdn.discordapp.com/attachments/1484887651881451643/1498917850864291991/5d9d7c932f69c220afd5b248c74ba066.png?ex=69f2e788&is=69f19608&hm=5f0074687d49d29e0e68e662d74db0c27eca962dc82a238f38f58027489c2e47&" alt="Monkey Style">
             </div>
             <div class="info-box">
                 <span class="tag">Style</span>
@@ -160,18 +134,67 @@
                 <div class="item-old">Old: 1,200</div>
             </div>
         </div>
-    </div>
 
-    <script>
-        document.querySelectorAll('.draggable-zone').forEach(zone => {
-            new Sortable(zone, {
-                animation: 150,
-                delay: 150,
-                delayOnTouchOnly: true,
-                ghostClass: 'sortable-ghost'
-            });
-        });
-    </script>
+        <div class="item-card">
+            <div class="image-box">
+                <img src="LINK_ẢNH_2" alt="Item">
+            </div>
+            <div class="info-box">
+                <span class="tag">Weapon</span>
+                <div class="item-name">Tên Đồ 2</div>
+                <div class="item-value">Value: <span>-</span></div>
+                <div class="item-old">Old: -</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box">
+                <img src="LINK_ẢNH_3" alt="Item">
+            </div>
+            <div class="info-box">
+                <span class="tag">Stomp</span>
+                <div class="item-name">Tên Đồ 3</div>
+                <div class="item-value">Value: <span>-</span></div>
+                <div class="item-old">Old: -</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box">
+                <img src="LINK_ẢNH_4" alt="Item">
+            </div>
+            <div class="info-box">
+                <span class="tag">Sledgehammer</span>
+                <div class="item-name">Tên Đồ 4</div>
+                <div class="item-value">Value: <span>-</span></div>
+                <div class="item-old">Old: -</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box">
+                <img src="LINK_ẢNH_5" alt="Item">
+            </div>
+            <div class="info-box">
+                <span class="tag">Accessory</span>
+                <div class="item-name">Tên Đồ 5</div>
+                <div class="item-value">Value: <span>-</span></div>
+                <div class="item-old">Old: -</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box">
+                <img src="LINK_ẢNH_6" alt="Item">
+            </div>
+            <div class="info-box">
+                <span class="tag">Item</span>
+                <div class="item-name">Tên Đồ 6</div>
+                <div class="item-value">Value: <span>-</span></div>
+                <div class="item-old">Old: -</div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
