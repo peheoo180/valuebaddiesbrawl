@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baddies Brawl Value 🌸</title>
+    <title>Baddies Brawl Value 🌸</title><script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
     <style>
         :root {
             --bg-color: #050a18;
@@ -165,5 +166,14 @@
         </div>
     </div>
 
-</body>
+</body><script>
+    // Lệnh này tìm cái bảng chứa vật phẩm và cho phép kéo thả
+    const grid = document.querySelector('.grid-container');
+    new Sortable(grid, {
+        animation: 150, // Hiệu ứng mượt khi đổi chỗ
+        delay: 100,     // Nhấn giữ 0.1 giây để bắt đầu kéo (tránh bị nhầm khi cuộn trang)
+        delayOnTouchOnly: true
+    });
+</script>
+
 </html>
