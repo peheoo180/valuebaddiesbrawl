@@ -49,7 +49,7 @@
             animation: rainbow-text 3s linear infinite;
         }
 
-        /* THANH TÌM KIẾM Ở TRÊN */
+        /* THANH TÌM KIẾM */
         .search-container {
             padding: 20px 20px 10px;
         }
@@ -72,7 +72,6 @@
             box-shadow: 0 0 10px rgba(255, 45, 85, 0.2);
         }
 
-        /* CHỮ ALL ITEMS Ở DƯỚI */
         .section-title {
             padding: 10px 20px 15px;
         }
@@ -303,6 +302,30 @@
                 <div class="item-old">Old: 7.000</div>
             </div>
         </div>
+
+        <div class="item-card">
+            <div class="image-box">
+                <img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499015546639745074/1777463502312.png?ex=69f34284&is=69f1f104&hm=fd4dff209001a03e566dc0ea5962624d80ee43fde41fe9f5f0c3cacb362c8fa4&" alt="New Item">
+            </div>
+            <div class="info-box">
+                <span class="tag">Aura</span>
+                <div class="item-name">Bat</div>
+                <div class="item-value">Value: <span>50.000</span></div>
+                <div class="item-old">Old: -</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box">
+                <img src="LINK_ẢNH_14" alt="New Item">
+            </div>
+            <div class="info-box">
+                <span class="tag">Item</span>
+                <div class="item-name">Vật Phẩm 14</div>
+                <div class="item-value">Value: <span>-</span></div>
+                <div class="item-old">Old: -</div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -312,7 +335,6 @@
 
             for (let i = 0; i < cards.length; i++) {
                 let name = cards[i].getElementsByClassName('item-name')[0].innerText.toLowerCase();
-                // Nếu tìm thấy tên hoặc nếu ô tìm kiếm trống, hiển thị lại card
                 if (name.includes(input)) {
                     cards[i].style.display = "block";
                 } else {
