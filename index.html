@@ -68,12 +68,26 @@
             color: white; outline: none; box-sizing: border-box;
         }
 
-        /* Tiêu đề All Items trắng bình thường */
+        /* --- BỘ LỌC CATEGORY --- */
+        .filter-container {
+            display: flex; gap: 10px; padding: 10px 20px;
+            overflow-x: auto; white-space: nowrap;
+            scrollbar-width: none; /* Ẩn scrollbar cho Firefox */
+        }
+        .filter-container::-webkit-scrollbar { display: none; } /* Ẩn scrollbar cho Chrome */
+
+        .filter-btn {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            color: var(--text-sub); padding: 8px 18px; border-radius: 50px;
+            font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+        .filter-btn.active {
+            background: var(--accent-purple); color: white;
+            border-color: #a855f7; box-shadow: 0 0 15px rgba(86, 28, 148, 0.5);
+        }
+
         .all-items-title {
-            padding: 10px 20px;
-            font-size: 18px;
-            font-weight: 700;
-            color: #ffffff;
+            padding: 10px 20px; font-size: 18px; font-weight: 700; color: #ffffff;
         }
 
         .grid-container {
@@ -124,13 +138,23 @@
 
     <div id="mainContent">
         <div class="header"><h1>BADDIES BRAWL VALUE 🌸</h1><div>☰</div></div>
-        <div class="search-container"><input type="text" id="searchInput" placeholder="Tìm tên vật phẩm..." onkeyup="searchItem()"></div>
         
-        <div class="all-items-title">All Items</div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Tìm tên vật phẩm..." onkeyup="filterItems()">
+        </div>
+
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="setFilter('All', this)">All Items</button>
+            <button class="filter-btn" onclick="setFilter('Style', this)">Style</button>
+            <button class="filter-btn" onclick="setFilter('Skin', this)">Skin</button>
+            <button class="filter-btn" onclick="setFilter('Aura', this)">Aura</button>
+        </div>
+        
+        <div class="all-items-title" id="listTitle">All Items</div>
 
         <div class="grid-container" id="itemGrid">
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938958892105739/5d9d7c932f69c220afd5b248c74ba066.png?ex=69f2fb30&is=69f1a9b0&hm=89d89a2f486a8686791b0114d16a01431cf78808f110258e417e657b8f72708a&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Monkey Style</div><div class="item-value">Value: <span>8.500</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938931008507974/66c6629cb38610dd030654bcb36dced8.png?ex=69f2fb2a&is=69f1a9aa&hm=ba6c6eeb6489ab3eea9d936cccf9e94435d1bc9bf05677c108286eb410fe577b&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Princess Style</div><div class="item-value">Value: <span>11.000</span></div><div class="item-old">Old: 9.700</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938931008507974/66c6629cb38610dd030654bcb36dced8.png?ex=69f2fb2a&is=69f1a9aa&hm=ba6c6eeb6489ab3eea9d936cccf9e94435d1bc9bf05677c108286eb410fe577b&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Princess style</div><div class="item-value">Value: <span>11.000</span></div><div class="item-old">Old: 9.700</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498943124041629747/b01999b81cc4701dd38d4ba51a8ffc52_1.png?ex=69f2ff11&is=69f1ad91&hm=88f719d473f495e275495275dc73c57aefd328b7ebec03136011f74838e79313&"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">EggRose</div><div class="item-value">Value: <span>9.820</span></div><div class="item-old">Old: 6.340</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498947310871122022/b01999b81cc4701dd38d4ba51a8ffc52.png?ex=69f302f8&is=69f1b178&hm=e5f52ae702093b1b377dd223d07755885a38e0b10e01adbfe39d35f93df9b2f1&"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">Arctic</div><div class="item-value">Value: <span>44.560</span></div><div class="item-old">Old: 26.710</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498948672115707914/2b23f0abfb9b978248d01cd669837058.png?ex=69f3043c&is=69f1b2bc&hm=1bb72f2b07570784ece784ca4ba3df61e2a5700dbf4c2ec60341c7f9c060461b&"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">Celestial Wings</div><div class="item-value">Value: <span>15.600</span></div><div class="item-old">Old: -</div></div></div>
@@ -149,6 +173,8 @@
     </div>
 
     <script>
+        let currentCategory = 'All';
+
         window.onload = function() {
             if (!sessionStorage.getItem('warningShown')) {
                 document.getElementById('warningOverlay').style.display = 'flex';
@@ -163,12 +189,38 @@
             logicJumping();
         }
 
-        function searchItem() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
+        // Hàm đặt filter category
+        function setFilter(cat, btn) {
+            currentCategory = cat;
+            
+            // Cập nhật giao diện nút
+            let buttons = document.getElementsByClassName('filter-btn');
+            for(let b of buttons) b.classList.remove('active');
+            btn.classList.add('active');
+
+            // Cập nhật tiêu đề
+            document.getElementById('listTitle').innerText = cat === 'All' ? 'All Items' : cat + 's';
+
+            filterItems(); // Chạy lại lọc
+        }
+
+        // Hàm lọc kết hợp Search và Category
+        function filterItems() {
+            let searchInput = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('item-card');
+
             for (let i = 0; i < cards.length; i++) {
                 let name = cards[i].querySelector('.item-name').innerText.toLowerCase();
-                cards[i].style.display = name.includes(input) ? "block" : "none";
+                let tag = cards[i].querySelector('.tag').innerText; // Lấy nội dung tag (Style, Skin, Aura)
+                
+                let matchesSearch = name.includes(searchInput);
+                let matchesCategory = (currentCategory === 'All' || tag === currentCategory);
+
+                if (matchesSearch && matchesCategory) {
+                    cards[i].style.display = "block";
+                } else {
+                    cards[i].style.display = "none";
+                }
             }
         }
 
