@@ -68,6 +68,14 @@
             color: white; outline: none; box-sizing: border-box;
         }
 
+        /* Tiêu đề All Items trắng bình thường */
+        .all-items-title {
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
         .grid-container {
             display: grid; grid-template-columns: repeat(2, 1fr);
             gap: 12px; padding: 0 15px 30px;
@@ -117,6 +125,9 @@
     <div id="mainContent">
         <div class="header"><h1>BADDIES BRAWL VALUE 🌸</h1><div>☰</div></div>
         <div class="search-container"><input type="text" id="searchInput" placeholder="Tìm tên vật phẩm..." onkeyup="searchItem()"></div>
+        
+        <div class="all-items-title">All Items</div>
+
         <div class="grid-container" id="itemGrid">
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938958892105739/5d9d7c932f69c220afd5b248c74ba066.png?ex=69f2fb30&is=69f1a9b0&hm=89d89a2f486a8686791b0114d16a01431cf78808f110258e417e657b8f72708a&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Monkey Style</div><div class="item-value">Value: <span>8.500</span></div><div class="item-old">Old: -</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938931008507974/66c6629cb38610dd030654bcb36dced8.png?ex=69f2fb2a&is=69f1a9aa&hm=ba6c6eeb6489ab3eea9d936cccf9e94435d1bc9bf05677c108286eb410fe577b&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Princess style</div><div class="item-value">Value: <span>11.000</span></div><div class="item-old">Old: 9.700</div></div></div>
@@ -138,7 +149,6 @@
     </div>
 
     <script>
-        // Kiểm tra xem đã hiện cảnh báo trong phiên làm việc này chưa
         window.onload = function() {
             if (!sessionStorage.getItem('warningShown')) {
                 document.getElementById('warningOverlay').style.display = 'flex';
