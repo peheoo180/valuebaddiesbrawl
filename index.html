@@ -1,99 +1,420 @@
-<script>
-    // HÀM SEARCH GIỮ NGUYÊN
-    function searchItem() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let cards = document.getElementsByClassName('item-card');
-        for (let i = 0; i < cards.length; i++) {
-            let name = cards[i].getElementsByClassName('item-name')[0].innerText.toLowerCase();
-            if (name.includes(input)) {
-                cards[i].style.display = "block";
-            } else {
-                cards[i].style.display = "none";
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Baddies Brawl Value 🌸</title>
+    <style>
+        :root {
+            --bg-dark: #050a18;
+            --card-bg: #0d162d;
+            --accent-purple: #561c94;
+            --text-main: #ffffff;
+            --text-sub: #8a99b1;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        html, body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(5, 10, 24, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 { 
+            font-size: 18px; 
+            margin: 0; 
+            font-weight: 800; 
+            background: linear-gradient(to right, #ff2d55, #561c94, #00d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow-text 3s linear infinite;
+        }
+
+        .search-container {
+            padding: 20px 20px 10px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        #searchInput:focus {
+            border-color: #ff2d55;
+            box-shadow: 0 0 10px rgba(255, 45, 85, 0.2);
+        }
+
+        .section-title {
+            padding: 10px 20px 15px;
+        }
+
+        .section-title h2 { font-size: 20px; margin: 0; font-weight: 700; color: #fff; }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 15px 30px;
+        }
+
+        .item-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease;
+        }
+
+        .item-card:active { transform: scale(0.97); }
+
+        .image-box {
+            width: 100%;
+            aspect-ratio: 1.2 / 1;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #561c94);
+            background-size: 400% 400%;
+            animation: gradient-bg 5s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradient-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .image-box img { 
+            width: 80%; 
+            height: 80%; 
+            object-fit: contain; 
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+        }
+
+        .info-box { padding: 12px; }
+        
+        .tag {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-sub);
+            font-size: 9px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .item-name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .item-value { font-size: 12px; color: var(--text-sub); }
+        .item-value span { color: #ffd700; font-weight: 600; }
+        .item-old { font-size: 12px; color: #ff2d55; font-weight: 600; margin-top: 2px; }
+
+        @keyframes rainbow-text {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>BADDIES BRAWL VALUE 🌸</h1>
+        <div style="color: white;">☰</div>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Tìm tên vật phẩm..." onkeyup="searchItem()">
+    </div>
+
+    <div class="section-title">
+        <h2>All Items</h2>
+    </div>
+
+    <div class="grid-container" id="itemGrid">
+        
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938958892105739/5d9d7c932f69c220afd5b248c74ba066.png?ex=69f2fb30&is=69f1a9b0&hm=89d89a2f486a8686791b0114d16a01431cf78808f110258e417e657b8f72708a&"></div>
+            <div class="info-box">
+                <span class="tag">Style</span>
+                <div class="item-name">Monkey Style</div>
+                <div class="item-value">Value: <span>8.500</span></div>
+                <div class="item-old">Old: -</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938931008507974/66c6629cb38610dd030654bcb36dced8.png?ex=69f2fb2a&is=69f1a9aa&hm=ba6c6eeb6489ab3eea9d936cccf9e94435d1bc9bf05677c108286eb410fe577b&"></div>
+            <div class="info-box">
+                <span class="tag">Style</span>
+                <div class="item-name">Princess style</div>
+                <div class="item-value">Value: <span>11.000</span></div>
+                <div class="item-old">Old: 9.700</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498943124041629747/b01999b81cc4701dd38d4ba51a8ffc52_1.png?ex=69f2ff11&is=69f1ad91&hm=88f719d473f495e275495275dc73c57aefd328b7ebec03136011f74838e79313&"></div>
+            <div class="info-box">
+                <span class="tag">Skin</span>
+                <div class="item-name">EggRose</div>
+                <div class="item-value">Value: <span>9.820</span></div>
+                <div class="item-old">Old: 6.340</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498947310871122022/b01999b81cc4701dd38d4ba51a8ffc52.png?ex=69f302f8&is=69f1b178&hm=e5f52ae702093b1b377dd223d07755885a38e0b10e01adbfe39d35f93df9b2f1&"></div>
+            <div class="info-box">
+                <span class="tag">Skin</span>
+                <div class="item-name">Arctic</div>
+                <div class="item-value">Value: <span>44.560</span></div>
+                <div class="item-old">Old: 26.710</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498948672115707914/2b23f0abfb9b978248d01cd669837058.png?ex=69f3043c&is=69f1b2bc&hm=1bb72f2b07570784ece784ca4ba3df61e2a5700dbf4c2ec60341c7f9c060461b&"></div>
+            <div class="info-box">
+                <span class="tag">Aura</span>
+                <div class="item-name">Celestial Wings</div>
+                <div class="item-value">Value: <span>15.600</span></div>
+                <div class="item-old">Old: -</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498951637841215518/e5520dc6533b59136756a2eaa58f472b.png?ex=69f306ff&is=69f1b57f&hm=afdccfea68d60824622f018750854f6807bac29f3e2bbe735754769709e0054b&"></div>
+            <div class="info-box">
+                <span class="tag">Aura</span>
+                <div class="item-name">LipSmash</div>
+                <div class="item-value">Value: <span>4.850</span></div>
+                <div class="item-old">Old: 257</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498960008392605767/9a223c3b0772c2c0dceba6be69072734_2.png?ex=69f30ecb&is=69f1bd4b&hm=e061385f113c9c0cad864ed2e3b34a7d26b0269d6f59fa7c0166b4e606e256ec&"></div>
+            <div class="info-box">
+                <span class="tag">Style</span>
+                <div class="item-name">Bonk Style</div>
+                <div class="item-value">Value: <span>600</span></div>
+                <div class="item-old">Old: 1.700</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498961414977749083/9a223c3b0772c2c0dceba6be69072734.png?ex=69f3101a&is=69f1be9a&hm=39a3403922e1880bcd1cc8086c1f011cac189df6eb8b33ce73894f0c01b8817f&"></div>
+            <div class="info-box">
+                <span class="tag">Style</span>
+                <div class="item-name">Elf Style</div>
+                <div class="item-value">Value: <span>3.653</span></div>
+                <div class="item-old">Old: 4.500</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498966867266764841/1f5c9c97731f782b83f50d535b1d628c.png?ex=69f3152e&is=69f1c3ae&hm=f3f419866be95e9b0a3e8e839cca01e7e891117de952c02ae3b860b6136dc03f&"></div>
+            <div class="info-box">
+                <span class="tag">Skin</span>
+                <div class="item-name">Blood Reaver</div>
+                <div class="item-value">Value: <span>4.500</span></div>
+                <div class="item-old">Old: 3.123</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498968743701774386/d352bcae62ef926c07436716ca738917.png?ex=69f316ed&is=69f1c56d&hm=de2d7c0d284ed8f7d1bdb3ca4c4f828b64956c13418f0abe7027a992754d24d5&"></div>
+            <div class="info-box">
+                <span class="tag">Style</span>
+                <div class="item-name">Icebreaker Style</div>
+                <div class="item-value">Value: <span>6.000</span></div>
+                <div class="item-old">Old: 5.800</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499030884148580492/1777467145852.png?ex=69f350cd&is=69f1ff4d&hm=2d72400490d91e649058440284a87cc8392922dfb47f0c2b22c180dbf2876f39&"></div>
+            <div class="info-box">
+                <span class="tag">Skin</span>
+                <div class="item-name">Spiderlord</div>
+                <div class="item-value">Value: <span>7.885</span></div>
+                <div class="item-old">Old: 8.400</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498980835850719332/8cdfc5dbcee53d8094bae03297c4d4e6.png?ex=69f32230&is=69f1d0b0&hm=1f3d6bd133119f1bf0deea8a2d2c641a07932b4d6c25e3156786ce30edb781a0&"></div>
+            <div class="info-box">
+                <span class="tag">Skin</span>
+                <div class="item-name">Omen</div>
+                <div class="item-value">Value: <span>10.900</span></div>
+                <div class="item-old">Old: 7.000</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499015546639745074/1777463502312.png?ex=69f34284&is=69f1f104&hm=fd4dff209001a03e566dc0ea5962624d80ee43fde41fe9f5f0c3cacb362c8fa4&"></div>
+            <div class="info-box">
+                <span class="tag">Aura</span>
+                <div class="item-name">Bat</div>
+                <div class="item-value">Value: <span>50.000</span></div>
+                <div class="item-old">Old: -</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499017073832100011/e3975e9e1f49870cc17111d5fa93f719_2.png?ex=69f343f0&is=69f1f270&hm=351efe4316d360f3c19e86417760ccb989cb566200bb8b6ebe5c9acd168bbd6e&"></div>
+            <div class="info-box">
+                <span class="tag">Style</span>
+                <div class="item-name">Witch Style</div>
+                <div class="item-value">Value: <span>20.000</span></div>
+                <div class="item-old">Old: 14.500</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499177426880692306/e3975e9e1f49870cc17111d5fa93f719.png?ex=69f3d947&is=69f287c7&hm=8632c9c4df371827e01387f1de6e8f29aac08f215786c0723f1b14aa1f954047&"></div>
+            <div class="info-box">
+                <span class="tag">Style</span>
+                <div class="item-name">Zombie Style</div>
+                <div class="item-value">Value: <span>13.000</span></div>
+                <div class="item-old">Old: 9.980</div>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499177387101913138/7e891b57300ffb2641afabba87474283.png?ex=69f3d93e&is=69f287be&hm=58399fec650887b09d24832ecab659b5361ad6ecd0f1bf0a4b5fccdabfc4075c&"></div>
+            <div class="info-box">
+                <span class="tag">Skin</span>
+                <div class="item-name">Ghost</div>
+                <div class="item-value">Value: <span>17.000</span></div>
+                <div class="item-old">Old: -</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- HÀM TÌM KIẾM ---
+        function searchItem() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('item-card');
+            for (let i = 0; i < cards.length; i++) {
+                let name = cards[i].getElementsByClassName('item-name')[0].innerText.toLowerCase();
+                if (name.includes(input)) {
+                    cards[i].style.display = "block";
+                } else {
+                    cards[i].style.display = "none";
+                }
             }
         }
-    }
 
-    // LOGIC RANDOM CHỌN MÓN VÀ NHẢY GIÁ (TỐI ĐA 3 MÓN)
-    function logicJumping() {
-        const now = new Date().getTime();
-        const lastUpdate = localStorage.getItem('lastUpdate');
-        const updateInterval = 30 * 60 * 1000; // 30 phút check 1 lần
+        // --- HÀM NHẢY GIÁ NGẪU NHIÊN 1-3 MÓN ---
+        function logicJumping() {
+            const now = new Date().getTime();
+            const lastUpdate = localStorage.getItem('lastUpdate');
+            const updateInterval = 30 * 60 * 1000; // Cứ 30 phút cho phép đổi 1 lần khi load trang
 
-        const cards = document.querySelectorAll('.item-card');
-        
-        // 1. Load giá cũ từ bộ nhớ máy (nếu có)
-        const savedData = JSON.parse(localStorage.getItem('baddiesValues'));
-        if (savedData) {
-            cards.forEach((card, i) => {
-                if(savedData[i]) {
-                    card.querySelector('.item-value span').innerText = savedData[i].v;
-                    card.querySelector('.item-old').innerText = "Old: " + savedData[i].o;
+            const cards = document.querySelectorAll('.item-card');
+            
+            // 1. Tải giá đã lưu trong máy lên trước để không bị reset khi F5
+            const savedData = JSON.parse(localStorage.getItem('baddiesValues'));
+            if (savedData) {
+                cards.forEach((card, i) => {
+                    if(savedData[i]) {
+                        card.querySelector('.item-value span').innerText = savedData[i].v;
+                        card.querySelector('.item-old').innerText = "Old: " + savedData[i].o;
+                    }
+                });
+            }
+
+            // 2. Kiểm tra xem đã đến giờ cập nhật chưa
+            if (lastUpdate && (now - lastUpdate < updateInterval)) return;
+
+            // 3. Quyết định số lượng món sẽ đổi giá lần này (0, 1, 2, hoặc 3)
+            let numToChange = 0;
+            let luck = Math.random();
+            if (luck > 0.4 && luck <= 0.7) numToChange = 1;      // 30% đổi 1 món
+            else if (luck > 0.7 && luck <= 0.9) numToChange = 2; // 20% đổi 2 món
+            else if (luck > 0.9) numToChange = 3;                // 10% đổi 3 món
+            // 40% còn lại là không đổi món nào
+
+            // 4. Chọn ngẫu nhiên index của các vật phẩm sẽ bị đổi giá
+            let chosenIndices = [];
+            if (numToChange > 0) {
+                let availableIndices = Array.from(Array(cards.length).keys());
+                availableIndices.sort(() => Math.random() - 0.5); // Xáo trộn vị trí
+                chosenIndices = availableIndices.slice(0, numToChange);
+            }
+
+            const newData = [];
+            cards.forEach((card, index) => {
+                let valSpan = card.querySelector('.item-value span');
+                let oldDiv = card.querySelector('.item-old');
+                
+                let currentVal = parseInt(valSpan.innerText.replace(/\./g, ''));
+                let oldValText = oldDiv.innerText.replace("Old: ", "");
+
+                if (chosenIndices.includes(index)) {
+                    // Món này được chọn để đổi giá
+                    let oldValBackup = currentVal;
+                    let percent = (Math.random() * 0.1) + 0.02; // Nhảy giá từ 2% đến 12%
+                    let change = Math.floor(currentVal * percent);
+                    
+                    if (Math.random() > 0.5) currentVal += change; // Tăng giá
+                    else currentVal -= change; // Giảm giá
+
+                    let newValStr = currentVal.toLocaleString('vi-VN');
+                    let oldValStr = oldValBackup.toLocaleString('vi-VN');
+
+                    valSpan.innerText = newValStr;
+                    oldDiv.innerText = "Old: " + oldValStr;
+                    
+                    // Hiệu ứng màu chớp nhoáng khi đổi giá thành công
+                    valSpan.style.transition = "color 0.5s";
+                    valSpan.style.color = (currentVal > oldValBackup) ? "#00ff88" : "#ff2d55";
+                    setTimeout(() => { valSpan.style.color = "#ffd700"; }, 3000);
+
+                    newData.push({ v: newValStr, o: oldValStr });
+                } else {
+                    // Món này giữ nguyên
+                    newData.push({ v: valSpan.innerText, o: oldValText });
                 }
             });
+
+            // 5. Lưu lại kết quả và mốc thời gian
+            localStorage.setItem('baddiesValues', JSON.stringify(newData));
+            localStorage.setItem('lastUpdate', now);
         }
 
-        // 2. Kiểm tra thời gian (chống spam F5 liên tục)
-        if (lastUpdate && (now - lastUpdate < updateInterval)) return;
-
-        // 3. Quyết định số lượng món sẽ đổi (0, 1, 2, hoặc 3)
-        let numToChange = 0;
-        let luck = Math.random();
-        if (luck > 0.5 && luck <= 0.75) numToChange = 1;      // 25% đổi 1 món
-        else if (luck > 0.75 && luck <= 0.92) numToChange = 2; // 17% đổi 2 món
-        else if (luck > 0.92) numToChange = 3;                // 8% đổi 3 món
-        // Còn lại (50%) là giữ nguyên giá (numToChange = 0)
-
-        // 4. Chọn ngẫu nhiên index của các vật phẩm sẽ được đổi
-        let chosenIndices = [];
-        if (numToChange > 0) {
-            let availableIndices = Array.from(Array(cards.length).keys()); // Tạo mảng [0, 1, 2, ...]
-            // Xáo trộn mảng để lấy ngẫu nhiên
-            availableIndices.sort(() => Math.random() - 0.5);
-            chosenIndices = availableIndices.slice(0, numToChange);
-        }
-
-        const newData = [];
-        cards.forEach((card, index) => {
-            let valSpan = card.querySelector('.item-value span');
-            let oldDiv = card.querySelector('.item-old');
-            
-            let currentValStr = valSpan.innerText.replace(/\./g, '');
-            let currentVal = parseInt(currentValStr);
-            let oldValText = oldDiv.innerText.replace("Old: ", "");
-
-            if (chosenIndices.includes(index)) {
-                // Món này nằm trong danh sách "bị" nhảy giá
-                let oldValBackup = currentVal;
-                // Nhảy giá từ 1% đến 12%
-                let percent = (Math.random() * 0.11) + 0.01; 
-                let change = Math.floor(currentVal * percent);
-                
-                // Tăng hoặc giảm tùy hên xui
-                if (Math.random() > 0.5) currentVal += change;
-                else currentVal -= change;
-
-                let newValFormatted = currentVal.toLocaleString('vi-VN');
-                let oldValFormatted = oldValBackup.toLocaleString('vi-VN');
-
-                valSpan.innerText = newValFormatted;
-                oldDiv.innerText = "Old: " + oldValFormatted;
-                
-                // Hiệu ứng đổi màu tạm thời cho đẹp
-                valSpan.style.transition = "color 0.5s";
-                valSpan.style.color = (currentVal > oldValBackup) ? "#00ff88" : "#ff2d55";
-                setTimeout(() => { valSpan.style.color = "#ffd700"; }, 5000);
-
-                newData.push({ v: newValFormatted, o: oldValFormatted });
-            } else {
-                // Giữ nguyên giá
-                newData.push({ v: valSpan.innerText, o: oldValText });
-            }
-        });
-
-        // 5. Lưu lại để lần sau F5 không bị đổi tiếp
-        localStorage.setItem('baddiesValues', JSON.stringify(newData));
-        localStorage.setItem('lastUpdate', now);
-    }
-
-    window.onload = logicJumping;
-</script>
+        // Chạy hàm ngay khi trang web vừa load xong
+        window.onload = logicJumping;
+    </script>
+</body>
+</html>
