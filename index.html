@@ -31,7 +31,7 @@
         }
 
         .warn-card {
-            background: var(--card-bg); border: none;
+            background: var(--card-bg); border: 1px solid var(--border-color);
             border-radius: 15px; padding: 15px; margin-bottom: 15px;
         }
 
@@ -64,24 +64,26 @@
         .search-container { padding: 20px 20px 10px; }
         #searchInput {
             width: 100%; padding: 12px 15px; background: var(--card-bg);
-            border: none; border-radius: 12px;
+            border: 1px solid var(--border-color); border-radius: 12px;
             color: white; outline: none; box-sizing: border-box;
         }
 
+        /* --- BỘ LỌC CATEGORY --- */
         .filter-container {
             display: flex; gap: 10px; padding: 10px 20px;
-            overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+            overflow-x: auto; white-space: nowrap;
+            scrollbar-width: none; /* Ẩn scrollbar cho Firefox */
         }
-        .filter-container::-webkit-scrollbar { display: none; }
+        .filter-container::-webkit-scrollbar { display: none; } /* Ẩn scrollbar cho Chrome */
 
         .filter-btn {
-            background: var(--card-bg); border: none;
+            background: var(--card-bg); border: 1px solid var(--border-color);
             color: var(--text-sub); padding: 8px 18px; border-radius: 50px;
             font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s;
         }
         .filter-btn.active {
             background: var(--accent-purple); color: white;
-            box-shadow: none;
+            border-color: #a855f7; box-shadow: 0 0 15px rgba(86, 28, 148, 0.5);
         }
 
         .all-items-title {
@@ -93,25 +95,18 @@
             gap: 12px; padding: 0 15px 30px;
         }
 
-        .item-card { 
-            background: var(--card-bg); border-radius: 18px; 
-            overflow: hidden; border: none;
-        }
-
-        /* --- HIỆU ỨNG 7 MÀU RAINBOW CỰC MẠNH --- */
+        .item-card { background: var(--card-bg); border-radius: 18px; overflow: hidden; border: 1px solid var(--border-color); }
         .image-box { 
             width: 100%; aspect-ratio: 1.2 / 1; 
-            background: linear-gradient(-45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            background-size: 400% 400%; 
-            animation: gradient-bg 5s linear infinite;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #561c94);
+            background-size: 400% 400%; animation: gradient-bg 5s ease infinite;
             display: flex; justify-content: center; align-items: center;
         }
         .image-box img { width: 80%; height: 80%; object-fit: contain; }
-
         .info-box { padding: 12px; }
-        .tag { background: rgba(0, 0, 0, 0.3); color: #fff; font-size: 9px; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-bottom: 6px; text-transform: uppercase; font-weight: 700; }
+        .tag { background: rgba(255, 255, 255, 0.08); color: var(--text-sub); font-size: 9px; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-bottom: 6px; text-transform: uppercase; }
         .item-name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .item-value span { color: #ffd700; font-weight: 800; }
+        .item-value span { color: #ffd700; font-weight: 600; }
         .item-old { font-size: 11px; color: #ff2d55; font-weight: 600; }
 
         @keyframes rainbow-text { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
@@ -123,8 +118,19 @@
     <div id="warningOverlay">
         <div style="flex-grow: 1; overflow-y: auto;">
             <div class="warn-card">
-                <span class="warn-title">❗ Cảnh báo an toàn</span>
-                <div class="warn-text">Website chỉ mang tính chất tham khảo giá trị vật phẩm.</div>
+                <span class="warn-title">❗ Cảnh báo: Hiện có nhiều website giả mạo cung cấp giá trị sai lệch để lừa đảo người chơi.</span>
+                <div class="warn-text">
+                    Website này <b>KHÔNG</b>:
+                    <ul style="margin: 5px 0; padding-left: 18px;">
+                        <li>Yêu cầu đăng nhập tài khoản</li>
+                        <li>Không cung cấp hack / tool / free item</li>
+                        <li>Không yêu cầu tải file</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="warn-card">
+                <span class="note-title">⚠️ Lưu ý: Tất cả giá trị chỉ mang tính tham khảo.</span>
+                <div class="warn-text">Chúng tôi không chịu trách nhiệm cho bất kỳ giao dịch nào. Hãy tự kiểm tra trước khi trade.</div>
             </div>
         </div>
         <div class="btn-box"><button class="btn-go" onclick="enterWeb()">Tiếp Tục...</button></div>
@@ -183,24 +189,38 @@
             logicJumping();
         }
 
+        // Hàm đặt filter category
         function setFilter(cat, btn) {
             currentCategory = cat;
+            
+            // Cập nhật giao diện nút
             let buttons = document.getElementsByClassName('filter-btn');
             for(let b of buttons) b.classList.remove('active');
             btn.classList.add('active');
+
+            // Cập nhật tiêu đề
             document.getElementById('listTitle').innerText = cat === 'All' ? 'All Items' : cat + 's';
-            filterItems();
+
+            filterItems(); // Chạy lại lọc
         }
 
+        // Hàm lọc kết hợp Search và Category
         function filterItems() {
             let searchInput = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('item-card');
+
             for (let i = 0; i < cards.length; i++) {
                 let name = cards[i].querySelector('.item-name').innerText.toLowerCase();
-                let tag = cards[i].querySelector('.tag').innerText;
+                let tag = cards[i].querySelector('.tag').innerText; // Lấy nội dung tag (Style, Skin, Aura)
+                
                 let matchesSearch = name.includes(searchInput);
                 let matchesCategory = (currentCategory === 'All' || tag === currentCategory);
-                cards[i].style.display = (matchesSearch && matchesCategory) ? "block" : "none";
+
+                if (matchesSearch && matchesCategory) {
+                    cards[i].style.display = "block";
+                } else {
+                    cards[i].style.display = "none";
+                }
             }
         }
 
@@ -209,6 +229,7 @@
             const lastUpdate = localStorage.getItem('lastUpdate');
             const updateInterval = 30 * 60 * 1000;
             const cards = document.querySelectorAll('.item-card');
+            
             const savedData = JSON.parse(localStorage.getItem('baddiesValues'));
             if (savedData) {
                 cards.forEach((card, i) => {
@@ -218,7 +239,37 @@
                     }
                 });
             }
+
             if (lastUpdate && (now - lastUpdate < updateInterval)) return;
+
+            let numToChange = Math.random() > 0.4 ? Math.floor(Math.random() * 3) + 1 : 0;
+            let chosenIndices = [];
+            if (numToChange > 0) {
+                let avail = Array.from(Array(cards.length).keys());
+                avail.sort(() => Math.random() - 0.5);
+                chosenIndices = avail.slice(0, numToChange);
+            }
+
+            const newData = [];
+            cards.forEach((card, index) => {
+                let valSpan = card.querySelector('.item-value span');
+                let oldDiv = card.querySelector('.item-old');
+                let curVal = parseInt(valSpan.innerText.replace(/\./g, ''));
+
+                if (chosenIndices.includes(index)) {
+                    let oldV = curVal;
+                    let change = Math.floor(curVal * (Math.random() * 0.1 + 0.02));
+                    curVal = Math.random() > 0.5 ? curVal + change : curVal - change;
+                    let curS = curVal.toLocaleString('vi-VN');
+                    let oldS = oldV.toLocaleString('vi-VN');
+                    valSpan.innerText = curS;
+                    oldDiv.innerText = "Old: " + oldS;
+                    newData.push({ v: curS, o: oldS });
+                } else {
+                    newData.push({ v: valSpan.innerText, o: oldDiv.innerText.replace("Old: ", "") });
+                }
+            });
+            localStorage.setItem('baddiesValues', JSON.stringify(newData));
             localStorage.setItem('lastUpdate', now);
         }
     </script>
