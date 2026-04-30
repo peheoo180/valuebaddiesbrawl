@@ -31,7 +31,7 @@
         }
 
         .warn-card {
-            background: var(--card-bg); border: none; /* Bỏ viền */
+            background: var(--card-bg); border: none;
             border-radius: 15px; padding: 15px; margin-bottom: 15px;
         }
 
@@ -64,7 +64,7 @@
         .search-container { padding: 20px 20px 10px; }
         #searchInput {
             width: 100%; padding: 12px 15px; background: var(--card-bg);
-            border: none; border-radius: 12px; /* Bỏ viền search */
+            border: none; border-radius: 12px;
             color: white; outline: none; box-sizing: border-box;
         }
 
@@ -75,16 +75,18 @@
         .filter-container::-webkit-scrollbar { display: none; }
 
         .filter-btn {
-            background: var(--card-bg); border: none; /* Bỏ viền nút */
-            color: var(--text-sub); padding: 10px 20px; border-radius: 50px;
+            background: var(--card-bg); border: none;
+            color: var(--text-sub); padding: 8px 18px; border-radius: 50px;
             font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s;
         }
         .filter-btn.active {
             background: var(--accent-purple); color: white;
-            box-shadow: none; /* Bỏ bóng xanh/tím */
+            box-shadow: none;
         }
 
-        .all-items-title { padding: 10px 20px; font-size: 18px; font-weight: 700; color: #ffffff; }
+        .all-items-title {
+            padding: 10px 20px; font-size: 18px; font-weight: 700; color: #ffffff;
+        }
 
         .grid-container {
             display: grid; grid-template-columns: repeat(2, 1fr);
@@ -92,20 +94,16 @@
         }
 
         .item-card { 
-            background: var(--card-bg); border-radius: 18px; overflow: hidden; 
-            border: none; /* Bỏ viền card */
+            background: var(--card-bg); border-radius: 18px; 
+            overflow: hidden; border: none;
         }
 
-        /* --- NỀN BẢY SẮC CẦU VỒNG --- */
+        /* --- HIỆU ỨNG 7 MÀU RAINBOW CỰC MẠNH --- */
         .image-box { 
             width: 100%; aspect-ratio: 1.2 / 1; 
-            background: linear-gradient(
-                45deg, 
-                #ff0000, #ff7300, #fffb00, #48ff00, 
-                #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000
-            );
+            background: linear-gradient(-45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
             background-size: 400% 400%; 
-            animation: gradient-bg 8s linear infinite;
+            animation: gradient-bg 5s linear infinite;
             display: flex; justify-content: center; align-items: center;
         }
         .image-box img { width: 80%; height: 80%; object-fit: contain; }
@@ -125,8 +123,8 @@
     <div id="warningOverlay">
         <div style="flex-grow: 1; overflow-y: auto;">
             <div class="warn-card">
-                <span class="warn-title">❗ Cảnh báo</span>
-                <div class="warn-text">Website này chỉ cung cấp giá trị tham khảo.</div>
+                <span class="warn-title">❗ Cảnh báo an toàn</span>
+                <div class="warn-text">Website chỉ mang tính chất tham khảo giá trị vật phẩm.</div>
             </div>
         </div>
         <div class="btn-box"><button class="btn-go" onclick="enterWeb()">Tiếp Tục...</button></div>
@@ -150,8 +148,21 @@
 
         <div class="grid-container" id="itemGrid">
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938958892105739/5d9d7c932f69c220afd5b248c74ba066.png?ex=69f2fb30&is=69f1a9b0&hm=89d89a2f486a8686791b0114d16a01431cf78808f110258e417e657b8f72708a&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Monkey Style</div><div class="item-value">Value: <span>8.500</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938931008507974/66c6629cb38610dd030654bcb36dced8.png?ex=69f2fb2a&is=69f1a9aa&hm=ba6c6eeb6489ab3eea9d936cccf9e94435d1bc9bf05677c108286eb410fe577b&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Princess style</div><div class="item-value">Value: <span>11.000</span></div><div class="item-old">Old: 9.700</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498943124041629747/b01999b81cc4701dd38d4ba51a8ffc52_1.png?ex=69f2ff11&is=69f1ad91&hm=88f719d473f495e275495275dc73c57aefd328b7ebec03136011f74838e79313&"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">EggRose</div><div class="item-value">Value: <span>9.820</span></div><div class="item-old">Old: 6.340</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498947310871122022/b01999b81cc4701dd38d4ba51a8ffc52.png?ex=69f302f8&is=69f1b178&hm=e5f52ae702093b1b377dd223d07755885a38e0b10e01adbfe39d35f93df9b2f1&"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">Arctic</div><div class="item-value">Value: <span>44.560</span></div><div class="item-old">Old: 26.710</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498948672115707914/2b23f0abfb9b978248d01cd669837058.png?ex=69f3043c&is=69f1b2bc&hm=1bb72f2b07570784ece784ca4ba3df61e2a5700dbf4c2ec60341c7f9c060461b&"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">Celestial Wings</div><div class="item-value">Value: <span>15.600</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498951637841215518/e5520dc6533b59136756a2eaa58f472b.png?ex=69f306ff&is=69f1b57f&hm=afdccfea68d60824622f018750854f6807bac29f3e2bbe735754769709e0054b&"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">LipSmash</div><div class="item-value">Value: <span>4.850</span></div><div class="item-old">Old: 257</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498960008392605767/9a223c3b0772c2c0dceba6be69072734_2.png?ex=69f30ecb&is=69f1bd4b&hm=e061385f113c9c0cad864ed2e3b34a7d26b0269d6f59fa7c0166b4e606e256ec&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Bonk Style</div><div class="item-value">Value: <span>600</span></div><div class="item-old">Old: 1.700</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498961414977749083/9a223c3b0772c2c0dceba6be69072734.png?ex=69f3101a&is=69f1be9a&hm=39a3403922e1880bcd1cc8086c1f011cac189df6eb8b33ce73894f0c01b8817f&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Elf Style</div><div class="item-value">Value: <span>3.653</span></div><div class="item-old">Old: 4.500</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498966867266764841/1f5c9c97731f782b83f50d535b1d628c.png?ex=69f3152e&is=69f1c3ae&hm=f3f419866be95e9b0a3e8e839cca01e7e891117de952c02ae3b860b6136dc03f&"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">Blood Reaver</div><div class="item-value">Value: <span>4.500</span></div><div class="item-old">Old: 3.123</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498968743701774386/d352bcae62ef926c07436716ca738917.png?ex=69f316ed&is=69f1c56d&hm=de2d7c0d284ed8f7d1bdb3ca4c4f828b64956c13418f0abe7027a992754d24d5&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Icebreaker Style</div><div class="item-value">Value: <span>6.000</span></div><div class="item-old">Old: 5.800</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499030884148580492/1777467145852.png?ex=69f350cd&is=69f1ff4d&hm=2d72400490d91e649058440284a87cc8392922dfb47f0c2b22c180dbf2876f39&"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">Spiderlord</div><div class="item-value">Value: <span>7.885</span></div><div class="item-old">Old: 8.400</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498980835850719332/8cdfc5dbcee53d8094bae03297c4d4e6.png?ex=69f32230&is=69f1d0b0&hm=1f3d6bd133119f1bf0deea8a2d2c641a07932b4d6c25e3156786ce30edb781a0&"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">Omen</div><div class="item-value">Value: <span>10.900</span></div><div class="item-old">Old: 7.000</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499015546639745074/1777463502312.png?ex=69f34284&is=69f1f104&hm=fd4dff209001a03e566dc0ea5962624d80ee43fde41fe9f5f0c3cacb362c8fa4&"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">Bat</div><div class="item-value">Value: <span>50.000</span></div><div class="item-old">Old: -</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499017073832100011/e3975e9e1f49870cc17111d5fa93f719_2.png?ex=69f343f0&is=69f1f270&hm=351efe4316d360f3c19e86417760ccb989cb566200bb8b6ebe5c9acd168bbd6e&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Witch Style</div><div class="item-value">Value: <span>20.000</span></div><div class="item-old">Old: 14.500</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499177426880692306/e3975e9e1f49870cc17111d5fa93f719.png?ex=69f3d947&is=69f287c7&hm=8632c9c4df371827e01387f1de6e8f29aac08f215786c0723f1b14aa1f954047&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Zombie Style</div><div class="item-value">Value: <span>13.000</span></div><div class="item-old">Old: 9.980</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499177387101913138/7e891b57300ffb2641afabba87474283.png?ex=69f3d93e&is=69f287be&hm=58399fec650887b09d24832ecab659b5361ad6ecd0f1bf0a4b5fccdabfc4075c&"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">Ghost</div><div class="item-value">Value: <span>17.000</span></div><div class="item-old">Old: -</div></div></div>
         </div>
     </div>
 
@@ -198,7 +209,6 @@
             const lastUpdate = localStorage.getItem('lastUpdate');
             const updateInterval = 30 * 60 * 1000;
             const cards = document.querySelectorAll('.item-card');
-            
             const savedData = JSON.parse(localStorage.getItem('baddiesValues'));
             if (savedData) {
                 cards.forEach((card, i) => {
@@ -208,17 +218,7 @@
                     }
                 });
             }
-
             if (lastUpdate && (now - lastUpdate < updateInterval)) return;
-
-            const newData = [];
-            cards.forEach((card) => {
-                let valSpan = card.querySelector('.item-value span');
-                let oldDiv = card.querySelector('.item-old');
-                let curVal = parseInt(valSpan.innerText.replace(/\./g, ''));
-                newData.push({ v: valSpan.innerText, o: oldDiv.innerText.replace("Old: ", "") });
-            });
-            localStorage.setItem('baddiesValues', JSON.stringify(newData));
             localStorage.setItem('lastUpdate', now);
         }
     </script>
