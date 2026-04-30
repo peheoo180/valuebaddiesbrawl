@@ -13,7 +13,6 @@
             --text-sub: #8a99b1;
             --border-color: rgba(255, 255, 255, 0.1);
             --accent-red: #ff2d55;
-            --gold: #ffd700;
         }
 
         html, body {
@@ -22,7 +21,6 @@
             margin: 0; padding: 0;
             font-family: 'Segoe UI', Roboto, sans-serif;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
         /* --- OVERLAY THÔNG BÁO --- */
@@ -33,12 +31,12 @@
         }
 
         .warn-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
+            background: var(--card-bg); border: none; /* Bỏ viền */
             border-radius: 15px; padding: 15px; margin-bottom: 15px;
         }
 
         .warn-title { color: var(--accent-red); font-weight: 800; display: block; margin-bottom: 8px; }
-        .note-title { color: var(--gold); font-weight: 800; display: block; margin-bottom: 8px; }
+        .note-title { color: #ffd700; font-weight: 800; display: block; margin-bottom: 8px; }
         .warn-text { font-size: 13px; line-height: 1.5; color: #fff; }
 
         .btn-box { display: flex; justify-content: flex-end; margin-top: 10px; }
@@ -65,8 +63,8 @@
 
         .search-container { padding: 20px 20px 10px; }
         #searchInput {
-            width: 100%; padding: 14px 15px; background: var(--card-bg);
-            border: 1px solid var(--border-color); border-radius: 12px;
+            width: 100%; padding: 12px 15px; background: var(--card-bg);
+            border: none; border-radius: 12px; /* Bỏ viền search */
             color: white; outline: none; box-sizing: border-box;
         }
 
@@ -77,16 +75,16 @@
         .filter-container::-webkit-scrollbar { display: none; }
 
         .filter-btn {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            color: var(--text-sub); padding: 8px 18px; border-radius: 50px;
+            background: var(--card-bg); border: none; /* Bỏ viền nút */
+            color: var(--text-sub); padding: 10px 20px; border-radius: 50px;
             font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s;
         }
         .filter-btn.active {
             background: var(--accent-purple); color: white;
-            border-color: #a855f7; box-shadow: 0 0 15px rgba(86, 28, 148, 0.4);
+            box-shadow: none; /* Bỏ bóng xanh/tím */
         }
 
-        .all-items-title { padding: 15px 20px 10px; font-size: 18px; font-weight: 700; color: #ffffff; }
+        .all-items-title { padding: 10px 20px; font-size: 18px; font-weight: 700; color: #ffffff; }
 
         .grid-container {
             display: grid; grid-template-columns: repeat(2, 1fr);
@@ -95,57 +93,31 @@
 
         .item-card { 
             background: var(--card-bg); border-radius: 18px; overflow: hidden; 
-            border: 1px solid var(--border-color); transition: 0.3s ease;
+            border: none; /* Bỏ viền card */
         }
 
-        /* --- HIỆU ỨNG RAINBOW NỀN CHO TẤT CẢ --- */
+        /* --- NỀN BẢY SẮC CẦU VỒNG --- */
         .image-box { 
             width: 100%; aspect-ratio: 1.2 / 1; 
-            /* Nền cầu vồng 7 màu chạy thẳng */
             background: linear-gradient(
                 45deg, 
                 #ff0000, #ff7300, #fffb00, #48ff00, 
                 #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000
             );
-            background-size: 400% 400%;
-            animation: rainbow-bg 10s linear infinite;
+            background-size: 400% 400%; 
+            animation: gradient-bg 8s linear infinite;
             display: flex; justify-content: center; align-items: center;
-            position: relative; overflow: hidden;
         }
+        .image-box img { width: 80%; height: 80%; object-fit: contain; }
 
-        .image-box img { 
-            width: 80%; height: 80%; object-fit: contain; 
-            z-index: 2;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); 
-        }
-        
         .info-box { padding: 12px; }
         .tag { background: rgba(0, 0, 0, 0.3); color: #fff; font-size: 9px; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-bottom: 6px; text-transform: uppercase; font-weight: 700; }
         .item-name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .item-value span { color: var(--gold); font-weight: 800; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
-        .item-old { font-size: 11px; color: #ff4d4d; font-weight: 700; }
+        .item-value span { color: #ffd700; font-weight: 800; }
+        .item-old { font-size: 11px; color: #ff2d55; font-weight: 600; }
 
-        /* ĐỘ HIẾM VIỀN TỰ ĐỘNG THEO VALUE */
-        .rarity-legendary { border: 2px solid var(--gold) !important; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
-        .rarity-epic { border: 2px solid #a855f7 !important; }
-        .rarity-rare { border: 2px solid #3b82f6 !important; }
-
-        #backToTop {
-            position: fixed; bottom: 25px; right: 20px;
-            width: 45px; height: 45px; background: var(--accent-purple);
-            color: white; border: none; border-radius: 50%;
-            display: none; justify-content: center; align-items: center;
-            font-size: 20px; font-weight: bold; cursor: pointer; z-index: 998;
-        }
-
-        /* --- KEYFRAMES --- */
         @keyframes rainbow-text { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
-        
-        @keyframes rainbow-bg {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        @keyframes gradient-bg { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
     </style>
 </head>
 <body>
@@ -153,11 +125,11 @@
     <div id="warningOverlay">
         <div style="flex-grow: 1; overflow-y: auto;">
             <div class="warn-card">
-                <span class="warn-title">❗ Cảnh báo giả mạo</span>
+                <span class="warn-title">❗ Cảnh báo</span>
                 <div class="warn-text">Website này chỉ cung cấp giá trị tham khảo.</div>
             </div>
         </div>
-        <div class="btn-box"><button class="btn-go" onclick="enterWeb()">Tôi đã hiểu</button></div>
+        <div class="btn-box"><button class="btn-go" onclick="enterWeb()">Tiếp Tục...</button></div>
     </div>
 
     <div id="mainContent">
@@ -178,12 +150,10 @@
 
         <div class="grid-container" id="itemGrid">
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938958892105739/5d9d7c932f69c220afd5b248c74ba066.png?ex=69f2fb30&is=69f1a9b0&hm=89d89a2f486a8686791b0114d16a01431cf78808f110258e417e657b8f72708a&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Monkey Style</div><div class="item-value">Value: <span>8.500</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938931008507974/66c6629cb38610dd030654bcb36dced8.png?ex=69f2fb2a&is=69f1a9aa&hm=ba6c6eeb6489ab3eea9d936cccf9e94435d1bc9bf05677c108286eb410fe577b&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Princess style</div><div class="item-value">Value: <span>11.000</span></div><div class="item-old">Old: 9.700</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499015546639745074/1777463502312.png?ex=69f34284&is=69f1f104&hm=fd4dff209001a03e566dc0ea5962624d80ee43fde41fe9f5f0c3cacb362c8fa4&"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">Bat</div><div class="item-value">Value: <span>50.000</span></div><div class="item-old">Old: -</div></div></div>
-            </div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499017073832100011/e3975e9e1f49870cc17111d5fa93f719_2.png?ex=69f343f0&is=69f1f270&hm=351efe4316d360f3c19e86417760ccb989cb566200bb8b6ebe5c9acd168bbd6e&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Witch Style</div><div class="item-value">Value: <span>20.000</span></div><div class="item-old">Old: 14.500</div></div></div>
+        </div>
     </div>
-
-    <button id="backToTop" onclick="scrollToTop()">↑</button>
 
     <script>
         let currentCategory = 'All';
@@ -194,26 +164,12 @@
             } else {
                 logicJumping();
             }
-            applyRarity();
         };
 
         function enterWeb() {
             document.getElementById('warningOverlay').style.display = 'none';
             sessionStorage.setItem('warningShown', 'true');
             logicJumping();
-        }
-
-        // Vẫn giữ độ hiếm ở VIỀN để phân biệt giá trị, còn NỀN thì cầu vồng hết
-        function applyRarity() {
-            const cards = document.querySelectorAll('.item-card');
-            cards.forEach(card => {
-                const valText = card.querySelector('.item-value span').innerText.replace(/\./g, '');
-                const val = parseInt(valText);
-                card.classList.remove('rarity-legendary', 'rarity-epic', 'rarity-rare');
-                if (val >= 40000) card.classList.add('rarity-legendary');
-                else if (val >= 15000) card.classList.add('rarity-epic');
-                else if (val >= 5000) card.classList.add('rarity-rare');
-            });
         }
 
         function setFilter(cat, btn) {
@@ -237,14 +193,6 @@
             }
         }
 
-        window.onscroll = function() {
-            let btn = document.getElementById("backToTop");
-            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) btn.style.display = "flex";
-            else btn.style.display = "none";
-        };
-
-        function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
-
         function logicJumping() {
             const now = new Date().getTime();
             const lastUpdate = localStorage.getItem('lastUpdate');
@@ -261,33 +209,17 @@
                 });
             }
 
-            if (lastUpdate && (now - lastUpdate < updateInterval)) {
-                applyRarity();
-                return;
-            }
+            if (lastUpdate && (now - lastUpdate < updateInterval)) return;
 
             const newData = [];
             cards.forEach((card) => {
                 let valSpan = card.querySelector('.item-value span');
                 let oldDiv = card.querySelector('.item-old');
                 let curVal = parseInt(valSpan.innerText.replace(/\./g, ''));
-
-                if (Math.random() > 0.8) {
-                    let oldV = curVal;
-                    let change = Math.floor(curVal * (Math.random() * 0.05 + 0.01));
-                    curVal = Math.random() > 0.5 ? curVal + change : curVal - change;
-                    let curS = curVal.toLocaleString('vi-VN');
-                    let oldS = oldV.toLocaleString('vi-VN');
-                    valSpan.innerText = curS;
-                    oldDiv.innerText = "Old: " + oldS;
-                    newData.push({ v: curS, o: oldS });
-                } else {
-                    newData.push({ v: valSpan.innerText, o: oldDiv.innerText.replace("Old: ", "") });
-                }
+                newData.push({ v: valSpan.innerText, o: oldDiv.innerText.replace("Old: ", "") });
             });
             localStorage.setItem('baddiesValues', JSON.stringify(newData));
             localStorage.setItem('lastUpdate', now);
-            applyRarity();
         }
     </script>
 </body>
