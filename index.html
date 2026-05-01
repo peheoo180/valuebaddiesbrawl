@@ -6,7 +6,13 @@
     
     <meta name="google-site-verification" content="DWMZ7geS59ohdBDTEw0FKiXWfDGgT6XTrSDWnzcpnSg" />
 
-    <title>Baddies Brawl Value 🌸 - Bảng Giá Uy Tín</title>
+    <title>Baddies Brawl Value 🌸</title>
+
+    <meta name="description" content="Cập nhật Baddies Brawl Value List chính xác nhất 2026. Công cụ Trade thông minh cho cộng đồng Baddies Brawl Việt Nam bởi Peheoo.">
+
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+
     <style>
         :root {
             --bg-dark: #050a18;
@@ -182,7 +188,6 @@
         window.onload = function() {
             logicJumping(); 
             collectData();
-            // Tự động kiểm tra nếu đã xem warning
             if (sessionStorage.getItem('warningShown')) {
                 document.getElementById('warningOverlay').style.display = 'none';
             }
@@ -269,7 +274,7 @@
         function logicJumping() {
             const now = new Date().getTime();
             const lastUpdate = localStorage.getItem('lastUpdate');
-            const updateInterval = 60 * 60 * 1000; // Nhảy giá mỗi 1 tiếng (60 phút)
+            const updateInterval = 60 * 60 * 1000; 
             const cards = document.querySelectorAll('.item-card');
             
             const savedData = JSON.parse(localStorage.getItem('baddiesValues'));
