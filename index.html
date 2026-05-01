@@ -3,100 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="google-site-verification" content="DWMZ7geS59ohdBDTEw0FKiXWfDGgT6XTrSDWnzcpnSg" />
-
     <title>Baddies Brawl Value 🌸</title>
-    <meta name="description" content="Cập nhật Baddies Brawl Value List chính xác nhất 2026. Công cụ Trade thông minh bởi Peheoo.">
-
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
 
     <style>
         :root {
-            --bg-dark: #0b0f19;
-            --card-bg: #161d2b;
+            --bg-dark: #050a18;
+            --card-bg: #0d162d;
             --accent-purple: #561c94;
             --text-main: #ffffff;
-            --text-sub: #9ca3af;
-            --border-color: rgba(255, 255, 255, 0.05);
+            --text-sub: #8a99b1;
+            --border-color: rgba(255, 255, 255, 0.1);
             --accent-red: #ff2d55;
-            /* Màu độ hiếm */
-            --rarity-low: linear-gradient(135deg, #14532d, #166534); /* Xanh lá */
-            --rarity-mid: linear-gradient(135deg, #1e40af, #1e3a8a); /* Xanh dương */
-            --rarity-high: linear-gradient(135deg, #581c87, #4c1d95); /* Tím */
+            
+            /* Gradient cho nền ảnh theo độ hiếm */
+            --rarity-low: linear-gradient(-45deg, #134e4a, #14532d, #064e3b, #166534); /* Xanh lá */
+            --rarity-mid: linear-gradient(-45deg, #1e3a8a, #1e40af, #1d4ed8, #2563eb); /* Xanh dương */
+            --rarity-high: linear-gradient(-45deg, #4c1d95, #6b21a8, #7e22ce, #581c87); /* Tím */
         }
 
         html, body {
             background-color: var(--bg-dark);
             color: var(--text-main);
             margin: 0; padding: 0;
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             overflow-x: hidden;
         }
 
-        /* --- BANNER UY TÍN --- */
-        .safety-banner {
-            background: #1e293b; color: #3b82f6; font-size: 11px;
-            text-align: center; padding: 8px; font-weight: bold;
-            border-bottom: 1px solid var(--border-color);
-        }
+        /* --- WARNING OVERLAY --- */
+        #warningOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 9999; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
+        .warn-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 15px; margin-bottom: 15px; }
+        .warn-title { color: var(--accent-red); font-weight: 800; display: block; margin-bottom: 8px; }
+        .btn-go { background: linear-gradient(45deg, #ff2d55, #561c94); color: white; border: none; padding: 10px 25px; border-radius: 50px; font-weight: 700; cursor: pointer; }
+
+        /* --- HEADER CẦU VỒNG --- */
+        .header { position: sticky; top: 0; z-index: 1000; background: rgba(5, 10, 24, 0.95); backdrop-filter: blur(15px); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); }
+        .header h1 { font-size: 18px; margin: 0; font-weight: 800; background: linear-gradient(to right, #ff2d55, #561c94, #00d2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbow-text 3s linear infinite; }
+        @keyframes rainbow-text { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
 
         /* --- TRADE SECTION --- */
-        .trade-section { display: none; padding: 10px; background: rgba(0,0,0,0.5); border-bottom: 2px solid var(--accent-purple); }
+        .trade-section { display: none; padding: 10px; background: rgba(0,0,0,0.3); border-bottom: 2px solid var(--accent-purple); }
         .trade-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .side-title { font-size: 11px; font-weight: 900; text-align: center; margin-bottom: 4px; }
         .trade-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
-        .trade-slot { 
-            aspect-ratio: 1/1; background: var(--card-bg); border: 1px dashed var(--border-color);
-            border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;
-        }
+        .trade-slot { aspect-ratio: 1/1; background: var(--card-bg); border: 1px dashed var(--border-color); border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
         .trade-slot img { width: 85%; height: 85%; object-fit: contain; }
         .side-total { text-align: center; font-size: 10px; font-weight: bold; color: #ffd700; margin-top: 6px; background: #000; padding: 4px; border-radius: 4px; }
 
         /* --- PICKER MODAL --- */
-        #pickerModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 10000; display: none; flex-direction: column; padding: 15px; }
+        #pickerModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 10000; display: none; flex-direction: column; padding: 15px; box-sizing: border-box; }
         .picker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; overflow-y: auto; }
-        .p-card { background: var(--card-bg); border-radius: 8px; padding: 5px; text-align: center; border: 1px solid var(--border-color); }
+        .p-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 5px; text-align: center; }
         .p-card img { width: 100%; aspect-ratio: 1/1; object-fit: contain; }
 
-        /* --- GIAO DIỆN CHÍNH --- */
-        .header { position: sticky; top: 0; z-index: 1000; background: rgba(11, 15, 25, 0.9); backdrop-filter: blur(10px); padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); }
-        .header h1 { font-size: 18px; margin: 0; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+        /* --- GRID CONTAINER --- */
+        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 15px; }
+        .item-card { background: var(--card-bg); border-radius: 18px; overflow: hidden; border: 1px solid var(--border-color); }
         
-        .search-container { padding: 15px 15px 5px; }
-        #searchInput { width: 100%; padding: 12px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; color: white; outline: none; box-sizing: border-box; }
-
-        .filter-container { display: flex; gap: 8px; padding: 10px 15px; overflow-x: auto; scrollbar-width: none; }
-        .filter-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-sub); padding: 8px 15px; border-radius: 50px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
-        .filter-btn.active { background: var(--accent-purple); color: white; }
-
-        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 10px 15px 30px; }
-        .item-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid var(--border-color); transition: 0.2s; }
-        
-        /* Box chứa ảnh - Sẽ đổi màu theo Value */
         .image-box { 
             width: 100%; aspect-ratio: 1.2 / 1; 
+            background-size: 400% 400%; 
+            animation: gradient-bg 5s ease infinite; 
             display: flex; justify-content: center; align-items: center; 
-            background: #1e293b; /* Màu mặc định */
         }
-        .image-box img { width: 80%; height: 80%; object-fit: contain; }
+        @keyframes gradient-bg { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
-        .info-box { padding: 10px; }
-        .tag { font-size: 9px; color: var(--text-sub); text-transform: uppercase; opacity: 0.7; }
-        .item-name { font-size: 13px; font-weight: 700; margin: 2px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .item-value { color: #ffd700; font-weight: 800; font-size: 14px; }
-        .item-old { font-size: 10px; color: var(--accent-red); font-weight: 600; }
-
-        /* Các class bổ trợ màu nền */
+        /* Class màu tự động */
         .bg-low { background: var(--rarity-low) !important; }
         .bg-mid { background: var(--rarity-mid) !important; }
         .bg-high { background: var(--rarity-high) !important; }
+
+        .image-box img { width: 80%; height: 80%; object-fit: contain; }
+        .info-box { padding: 12px; }
+        .tag { background: rgba(255, 255, 255, 0.08); color: var(--text-sub); font-size: 9px; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-bottom: 6px; text-transform: uppercase; }
+        .item-name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .item-value span { color: #ffd700; font-weight: 600; }
+        .item-old { font-size: 11px; color: #ff2d55; font-weight: 600; }
+
+        .filter-container { display: flex; gap: 10px; padding: 10px 15px; overflow-x: auto; scrollbar-width: none; }
+        .filter-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-sub); padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+        .active { background: var(--accent-purple); color: white; }
     </style>
 </head>
 <body>
 
-    <div class="safety-banner">
-        🛡️ WEBSITE BẢO MẬT: KHÔNG YÊU CẦU ĐĂNG NHẬP
+    <div id="warningOverlay">
+        <div class="warn-card">
+            <span class="warn-title">❗ CẢNH BÁO: HIỆN CÓ NHIỀU WEB GIẢ MẠO</span>
+            <div style="font-size: 13px;">Website này <b>KHÔNG</b> yêu cầu đăng nhập. Tuyệt đối không nhập pass vào bất cứ đâu!</div>
+        </div>
+        <div style="text-align: right;"><button class="btn-go" onclick="enterWeb()">TIẾP TỤC...</button></div>
     </div>
 
     <div id="pickerModal">
@@ -110,13 +105,13 @@
     <div id="mainContent">
         <div class="header"><h1>BADDIES BRAWL VALUE 🌸</h1><div>☰</div></div>
         
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Tìm vật phẩm..." onkeyup="filterItems()">
+        <div style="padding: 15px 15px 0px;">
+            <input type="text" id="searchInput" placeholder="Tìm tên vật phẩm..." onkeyup="filterItems()" style="width:100%; padding:12px; background:var(--card-bg); border:1px solid var(--border-color); border-radius:12px; color:white;">
         </div>
 
         <div class="filter-container">
-            <button class="filter-btn active" onclick="setFilter('All', this)">All</button>
-            <button class="filter-btn" style="color:var(--accent-red)" onclick="toggleTrade()">TRADE TOOL</button>
+            <button class="filter-btn active" onclick="setFilter('All', this)">All Items</button>
+            <button class="filter-btn" style="background:var(--accent-red); color:white;" onclick="toggleTrade()">TRADE TOOL</button>
             <button class="filter-btn" onclick="setFilter('Style', this)">Style</button>
             <button class="filter-btn" onclick="setFilter('Skin', this)">Skin</button>
             <button class="filter-btn" onclick="setFilter('Aura', this)">Aura</button>
@@ -134,7 +129,7 @@
                     <div class="side-total">Value: <span id="totalYou">0</span></div>
                 </div>
                 <div>
-                    <div class="side-title" style="color:#3b82f6">THEM</div>
+                    <div class="side-title" style="color:#00d2ff">THEM</div>
                     <div class="trade-grid" id="gridThem">
                         <div class="trade-slot" onclick="openPicker('them', 0)">+</div>
                         <div class="trade-slot" onclick="openPicker('them', 1)">+</div>
@@ -147,10 +142,16 @@
 
         <div class="grid-container" id="itemGrid">
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938958892105739/5d9d7c932f69c220afd5b248c74ba066.png"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Monkey Style</div><div class="item-value">Value: <span>8.500</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499015546639745074/1777463502312.png"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">Bat Aura</div><div class="item-value">Value: <span>50.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498960008392605767/9a223c3b0772c2c0dceba6be69072734_2.png"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Bonk Style</div><div class="item-value">Value: <span>600</span></div><div class="item-old">Old: 1.700</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498938931008507974/66c6629cb38610dd030654bcb36dced8.png"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Princess style</div><div class="item-value">Value: <span>11.000</span></div><div class="item-old">Old: 9.700</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498943124041629747/b01999b81cc4701dd38d4ba51a8ffc52_1.png"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">EggRose</div><div class="item-value">Value: <span>9.820</span></div><div class="item-old">Old: 6.340</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498947310871122022/b01999b81cc4701dd38d4ba51a8ffc52.png"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">Arctic</div><div class="item-value">Value: <span>44.560</span></div><div class="item-old">Old: 26.710</div></div></div>
-            </div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498948672115707914/2b23f0abfb9b978248d01cd669837058.png"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">Celestial Wings</div><div class="item-value">Value: <span>15.600</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498951637841215518/e5520dc6533b59136756a2eaa58f472b.png"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">LipSmash</div><div class="item-value">Value: <span>4.850</span></div><div class="item-old">Old: 257</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498960008392605767/9a223c3b0772c2c0dceba6be69072734_2.png"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Bonk Style</div><div class="item-value">Value: <span>600</span></div><div class="item-old">Old: 1.700</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1498961414977749083/9a223c3b0772c2c0dceba6be69072734.png"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Elf Style</div><div class="item-value">Value: <span>3.653</span></div><div class="item-old">Old: 4.500</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499015546639745074/1777463502312.png"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">Bat Aura</div><div class="item-value">Value: <span>50.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499017073832100011/e3975e9e1f49870cc17111d5fa93f719_2.png"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Witch Style</div><div class="item-value">Value: <span>20.000</span></div><div class="item-old">Old: 14.500</div></div></div>
+        </div>
     </div>
 
     <script>
@@ -158,8 +159,10 @@
 
         window.onload = function() {
             collectData();
-            updateRarityColors();
+            updateColors(); // Tự đổi màu Xanh/Tím khi load
         };
+
+        function enterWeb() { document.getElementById('warningOverlay').style.display = 'none'; }
 
         function collectData() {
             listItemsData = [];
@@ -173,15 +176,16 @@
             });
         }
 
-        // --- HÀM TỰ ĐỘNG ĐỔI MÀU NỀN ---
-        function updateRarityColors() {
+        // HÀM QUAN TRỌNG: Tự động đổi màu nền ảnh dựa trên Value
+        function updateColors() {
             document.querySelectorAll('.item-card').forEach(card => {
                 let val = parseInt(card.querySelector('.item-value span').innerText.replace(/\./g, ''));
                 let box = card.querySelector('.image-box');
-                
-                if (val >= 20000) box.classList.add('bg-high');      // Tím
-                else if (val >= 5000) box.classList.add('bg-mid');   // Xanh dương
-                else box.classList.add('bg-low');                    // Xanh lá
+                box.classList.remove('bg-low', 'bg-mid', 'bg-high');
+
+                if (val >= 20000) box.classList.add('bg-high'); // Trên 20k -> Tím
+                else if (val >= 5000) box.classList.add('bg-mid'); // 5k-20k -> Xanh dương
+                else box.classList.add('bg-low'); // Dưới 5k -> Xanh lá
             });
         }
 
@@ -202,7 +206,7 @@
             listItemsData.forEach(item => {
                 let d = document.createElement('div');
                 d.className = 'p-card';
-                d.innerHTML = `<img src="${item.img}"><div style="font-size:9px">${item.name}</div>`;
+                d.innerHTML = `<img src="${item.img}">`;
                 d.onclick = () => {
                     slot.innerHTML = `<img src="${item.img}"><span style="display:none" class="v-val">${item.val}</span>`;
                     updateTradeTotal(); closePicker();
