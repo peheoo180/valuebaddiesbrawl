@@ -16,11 +16,9 @@
             --text-sub: #8a99b1;
             --border-color: rgba(255, 255, 255, 0.1);
             --accent-red: #ff2d55;
-            
-            /* CÁC NỀN TRƯỢT MÀU CHO ĐỘ HIẾM */
-            --rarity-low: linear-gradient(-45deg, #134e4a, #14532d, #064e3b, #166534); /* Xanh lá */
-            --rarity-mid: linear-gradient(-45deg, #1e3a8a, #1e40af, #1d4ed8, #2563eb); /* Xanh dương */
-            --rarity-high: linear-gradient(-45deg, #4c1d95, #6b21a8, #7e22ce, #581c87); /* Tím */
+            --rarity-low: linear-gradient(-45deg, #134e4a, #14532d, #064e3b, #166534);
+            --rarity-mid: linear-gradient(-45deg, #1e3a8a, #1e40af, #1d4ed8, #2563eb);
+            --rarity-high: linear-gradient(-45deg, #4c1d95, #6b21a8, #7e22ce, #581c87);
         }
 
         html, body {
@@ -30,6 +28,21 @@
             font-family: 'Segoe UI', Roboto, sans-serif;
             overflow-x: hidden;
         }
+
+        /* --- SAFETY BANNER (FIX MÙI SCAM) --- */
+        .safety-banner {
+            background: rgba(255, 45, 85, 0.1);
+            border: 1px solid rgba(255, 45, 85, 0.2);
+            margin: 15px 20px 5px;
+            padding: 10px 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .safety-icon { font-size: 20px; }
+        .safety-text { font-size: 11px; color: #ff8fa3; line-height: 1.4; }
+        .safety-text b { color: #fff; }
 
         /* --- TRADE SECTION --- */
         .trade-section { display: none; padding: 10px; background: rgba(0,0,0,0.3); border-bottom: 2px solid var(--accent-purple); }
@@ -48,20 +61,11 @@
         .p-card img { width: 100%; aspect-ratio: 1/1; object-fit: contain; }
         .p-card div { font-size: 9px; color: #fff; margin-top: 4px; white-space: nowrap; overflow: hidden; }
 
-        /* --- WARNING OVERLAY (ANTI-SCAM CỰC MẠNH) --- */
-        #warningOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 9999; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
-        .warn-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 15px; margin-bottom: 15px; border-left: 5px solid var(--accent-red); }
-        .warn-title { color: var(--accent-red); font-weight: 800; display: block; margin-bottom: 8px; font-size: 15px; text-transform: uppercase; }
-        .note-title { color: #ffd700; font-weight: 800; display: block; margin-bottom: 8px; }
-        .warn-text { font-size: 13px; line-height: 1.5; color: #fff; }
-        .scam-alert { background: rgba(255, 45, 85, 0.1); border: 1px solid var(--accent-red); padding: 10px; border-radius: 10px; margin-top: 10px; color: #ff8fa3; font-weight: bold; font-size: 12px; }
-        .btn-go { background: linear-gradient(45deg, #ff2d55, #561c94); color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: 700; cursor: pointer; }
-
         /* --- GIAO DIỆN CHÍNH --- */
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(5, 10, 24, 0.95); backdrop-filter: blur(15px); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); }
         .header h1 { font-size: 18px; margin: 0; font-weight: 800; background: linear-gradient(to right, #ff2d55, #561c94, #00d2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbow-text 3s linear infinite; }
         
-        .search-container { padding: 20px 20px 10px; }
+        .search-container { padding: 10px 20px 5px; }
         #searchInput { width: 100%; padding: 12px 15px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; color: white; outline: none; box-sizing: border-box; }
         
         .filter-container { display: flex; gap: 10px; padding: 10px 20px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
@@ -73,7 +77,6 @@
         .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 15px 30px; }
         .item-card { background: var(--card-bg); border-radius: 18px; overflow: hidden; border: 1px solid var(--border-color); }
         
-        /* BOX ẢNH CÓ NỀN TỰ ĐỘNG CHUYỂN ĐỘNG */
         .image-box { 
             width: 100%; aspect-ratio: 1.2 / 1; 
             background-size: 400% 400% !important; 
@@ -81,7 +84,6 @@
             display: flex; justify-content: center; align-items: center; 
         }
         
-        /* Class màu được thêm tự động bằng JS */
         .bg-low { background: var(--rarity-low); }
         .bg-mid { background: var(--rarity-mid); }
         .bg-high { background: var(--rarity-high); }
@@ -99,21 +101,6 @@
 </head>
 <body>
 
-    <div id="warningOverlay">
-        <div style="flex-grow: 1; overflow-y: auto;">
-            <div class="warn-card">
-                <span class="warn-title">❗ CẢNH BÁO LỪA ĐẢO</span>
-                <div class="warn-text">Hiện có rất nhiều web <b>GIẢ MẠO</b> copy giao diện của chúng tôi để lừa lấy mật khẩu tài khoản của bạn.</div>
-                <div class="scam-alert">TUYỆT ĐỐI KHÔNG: Nhập mật khẩu, Mã OTP, hay quét mã QR vào bất cứ web nào nói là để "nhận đồ free" hoặc "đổi quà".</div>
-            </div>
-            <div class="warn-card">
-                <span class="note-title">🛡️ AN TOÀN TUYỆT ĐỐI</span>
-                <div class="warn-text">Web của Peheoo <b>KHÔNG</b> yêu cầu bạn đăng nhập. Bạn có thể xem giá và trade thoải mái mà không cần account.</div>
-            </div>
-        </div>
-        <div style="display:flex; justify-content:flex-end;"><button class="btn-go" onclick="enterWeb()">TÔI ĐÃ HIỂU</button></div>
-    </div>
-
     <div id="pickerModal">
         <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
             <b style="font-size:14px">CHỌN VẬT PHẨM</b>
@@ -125,6 +112,14 @@
     <div id="mainContent">
         <div class="header"><h1>BADDIES BRAWL VALUE 🌸</h1><div>☰</div></div>
         
+        <div class="safety-banner">
+            <span class="safety-icon">🛡️</span>
+            <div class="safety-text">
+                <b>HỆ THỐNG AN TOÀN:</b> Web chính chủ bởi Peheoo. <br>
+                Không yêu cầu đăng nhập. Cảnh giác với web giả mạo!
+            </div>
+        </div>
+
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Tìm tên vật phẩm..." onkeyup="filterItems()">
         </div>
@@ -202,28 +197,18 @@
         window.onload = function() {
             logicJumping(); 
             collectData();
-            updateAllBackgrounds(); // Tự động nhuộm màu nền
-            if (sessionStorage.getItem('warningShown')) {
-                document.getElementById('warningOverlay').style.display = 'none';
-            }
+            updateAllBackgrounds(); 
         };
 
-        function enterWeb() {
-            document.getElementById('warningOverlay').style.display = 'none';
-            sessionStorage.setItem('warningShown', 'true');
-        }
-
-        // HÀM QUAN TRỌNG: Nhuộm màu nền ảnh dựa trên Value
         function updateAllBackgrounds() {
             document.querySelectorAll('.item-card').forEach(card => {
                 let valText = card.querySelector('.item-value span').innerText.replace(/\./g, '');
                 let val = parseInt(valText);
                 let box = card.querySelector('.image-box');
-                
                 box.classList.remove('bg-low', 'bg-mid', 'bg-high');
-                if (val >= 20000) box.classList.add('bg-high');      // Trên 20k -> Tím
-                else if (val >= 5000) box.classList.add('bg-mid');   // 5k-20k -> Xanh dương
-                else box.classList.add('bg-low');                    // Dưới 5k -> Xanh lá
+                if (val >= 20000) box.classList.add('bg-high');
+                else if (val >= 5000) box.classList.add('bg-mid');
+                else box.classList.add('bg-low');
             });
         }
 
@@ -305,7 +290,6 @@
             const lastUpdate = localStorage.getItem('lastUpdate');
             const updateInterval = 60 * 60 * 1000; 
             const cards = document.querySelectorAll('.item-card');
-            
             const savedData = JSON.parse(localStorage.getItem('baddiesValues'));
             if (savedData && savedData.length === cards.length) {
                 cards.forEach((card, i) => {
@@ -315,32 +299,26 @@
                     }
                 });
             }
-
             if (lastUpdate && (now - lastUpdate < updateInterval)) return;
-
             const newData = [];
             cards.forEach((card) => {
                 let valSpan = card.querySelector('.item-value span');
                 let oldDiv = card.querySelector('.item-old');
                 let curVal = parseInt(valSpan.innerText.replace(/\./g, ''));
                 let oldV = curVal;
-
                 if (Math.random() > 0.5) { 
                     let change = Math.floor(curVal * (Math.random() * 0.04 + 0.01));
                     curVal = Math.random() > 0.5 ? curVal + change : curVal - change;
                 }
-                
                 let curS = curVal.toLocaleString('vi-VN');
                 let oldS = oldV.toLocaleString('vi-VN');
-                
                 valSpan.innerText = curS;
                 oldDiv.innerText = "Old: " + oldS;
                 newData.push({ v: curS, o: oldS });
             });
-
             localStorage.setItem('baddiesValues', JSON.stringify(newData));
             localStorage.setItem('lastUpdate', now);
-            updateAllBackgrounds(); // Cập nhật lại màu sau khi nhảy giá
+            updateAllBackgrounds();
         }
     </script>
 </body>
