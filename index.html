@@ -14,8 +14,9 @@
             --accent-purple: #561c94;
             --text-main: #ffffff;
             --text-sub: #8a99b1;
-            --border-color: rgba(255, 255, 255, 0.1);
+            --border-color: rgba(255, 255, 255, 0.08);
             --accent-red: #ff2d55;
+            --accent-green: #00ff88;
             --rarity-low: linear-gradient(-45deg, #134e4a, #14532d, #064e3b, #166534);
             --rarity-mid: linear-gradient(-45deg, #1e3a8a, #1e40af, #1d4ed8, #2563eb);
             --rarity-high: linear-gradient(-45deg, #4c1d95, #6b21a8, #7e22ce, #581c87);
@@ -29,20 +30,34 @@
             overflow-x: hidden;
         }
 
-        /* --- SAFETY BANNER (FIX MÙI SCAM) --- */
-        .safety-banner {
-            background: rgba(255, 45, 85, 0.1);
-            border: 1px solid rgba(255, 45, 85, 0.2);
-            margin: 15px 20px 5px;
-            padding: 10px 15px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        /* --- HEADER MỚI: HIỆN ĐẠI & TINH TẾ --- */
+        .header { 
+            position: sticky; top: 0; z-index: 1000; 
+            background: rgba(5, 10, 24, 0.85); 
+            backdrop-filter: blur(20px); 
+            padding: 15px 20px 10px; 
+            border-bottom: 1px solid var(--border-color);
+            display: flex; flex-direction: column; gap: 8px;
         }
-        .safety-icon { font-size: 20px; }
-        .safety-text { font-size: 11px; color: #ff8fa3; line-height: 1.4; }
-        .safety-text b { color: #fff; }
+        
+        .header-top { display: flex; justify-content: space-between; align-items: center; }
+        
+        .header h1 { 
+            font-size: 16px; margin: 0; font-weight: 800; letter-spacing: 0.5px;
+            background: linear-gradient(to right, #ffffff, #8a99b1);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* BANNER XÁC MINH (XÓA MÙI SCAM) */
+        .verified-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(0, 255, 136, 0.06);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            padding: 5px 12px; border-radius: 100px; align-self: flex-start;
+        }
+        .v-dot { width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); }
+        .v-text { font-size: 10px; color: var(--accent-green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .v-sub { font-size: 10px; color: #fff; opacity: 0.8; font-weight: 400; margin-left: 2px; }
 
         /* --- TRADE SECTION --- */
         .trade-section { display: none; padding: 10px; background: rgba(0,0,0,0.3); border-bottom: 2px solid var(--accent-purple); }
@@ -62,11 +77,14 @@
         .p-card div { font-size: 9px; color: #fff; margin-top: 4px; white-space: nowrap; overflow: hidden; }
 
         /* --- GIAO DIỆN CHÍNH --- */
-        .header { position: sticky; top: 0; z-index: 1000; background: rgba(5, 10, 24, 0.95); backdrop-filter: blur(15px); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); }
-        .header h1 { font-size: 18px; margin: 0; font-weight: 800; background: linear-gradient(to right, #ff2d55, #561c94, #00d2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbow-text 3s linear infinite; }
-        
-        .search-container { padding: 10px 20px 5px; }
-        #searchInput { width: 100%; padding: 12px 15px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; color: white; outline: none; box-sizing: border-box; }
+        .search-container { padding: 15px 20px 5px; }
+        #searchInput { 
+            width: 100%; padding: 12px 18px; 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid var(--border-color); 
+            border-radius: 12px; color: white; outline: none; box-sizing: border-box; 
+        }
+        #searchInput:focus { border-color: var(--accent-purple); background: rgba(255, 255, 255, 0.06); }
         
         .filter-container { display: flex; gap: 10px; padding: 10px 20px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
         .filter-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-sub); padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; }
@@ -110,13 +128,15 @@
     </div>
 
     <div id="mainContent">
-        <div class="header"><h1>BADDIES BRAWL VALUE 🌸</h1><div>☰</div></div>
-        
-        <div class="safety-banner">
-            <span class="safety-icon">🛡️</span>
-            <div class="safety-text">
-                <b>HỆ THỐNG AN TOÀN:</b> Web chính chủ bởi Peheoo. <br>
-                Không yêu cầu đăng nhập. Cảnh giác với web giả mạo!
+        <div class="header">
+            <div class="header-top">
+                <h1>BADDIES BRAWL VALUE 🌸</h1>
+                <div style="opacity: 0.5; font-size: 20px;">☰</div>
+            </div>
+            <div class="verified-badge">
+                <div class="v-dot"></div>
+                <span class="v-text">Official</span>
+                <span class="v-sub">• Verified by Peheoo (No Login)</span>
             </div>
         </div>
 
