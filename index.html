@@ -266,7 +266,7 @@
         function logicJumping() {
             const now = new Date().getTime();
             const lastUpdate = localStorage.getItem('lastUpdate');
-            const updateInterval = 1 * 60 * 1000; // Nhảy giá mỗi 1 phút cho dễ thấy
+            const updateInterval = 100 * 60 * 1000; // Nhảy giá mỗi 1 phút cho dễ thấy
             const cards = document.querySelectorAll('.item-card');
             
             // 1. Luôn hiển thị dữ liệu đã lưu lên web trước
@@ -293,7 +293,7 @@
 
                 // Tỉ lệ nhảy giá (50% cơ hội đổi giá)
                 if (Math.random() > 0.5) { 
-                    let change = Math.floor(curVal * (Math.random() * 0.05 + 0.01));
+                    let change = Math.floor(curVal * (Math.random() * 0.04 + 0.01));
                     curVal = Math.random() > 0.5 ? curVal + change : curVal - change;
                 }
                 
