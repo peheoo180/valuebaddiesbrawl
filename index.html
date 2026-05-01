@@ -23,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* --- TRADE SECTION (9 Ô) --- */
+        /* --- TRADE SECTION --- */
         .trade-section { display: none; padding: 10px; background: rgba(0,0,0,0.3); border-bottom: 2px solid var(--accent-purple); }
         .trade-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .side-title { font-size: 11px; font-weight: 900; text-align: center; margin-bottom: 4px; letter-spacing: 1px; }
@@ -44,7 +44,7 @@
         .p-card img { width: 100%; aspect-ratio: 1/1; object-fit: contain; }
         .p-card div { font-size: 9px; color: #fff; margin-top: 4px; white-space: nowrap; overflow: hidden; }
 
-        /* --- GIAO DIỆN CHÍNH (GIỮ Y HỆT CODE CŨ) --- */
+        /* --- GIAO DIỆN CHÍNH --- */
         #warningOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 9999; display: none; flex-direction: column; padding: 20px; box-sizing: border-box; }
         .warn-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 15px; margin-bottom: 15px; }
         .warn-title { color: var(--accent-red); font-weight: 800; display: block; margin-bottom: 8px; }
@@ -81,8 +81,7 @@
     <div id="warningOverlay">
         <div style="flex-grow: 1; overflow-y: auto;">
             <div class="warn-card">
-                <span class="warn-title">❗ Cảnh báo: Hiện có nhiều website giả mạo cung cấp giá trị sai lệch 
-để lừa đảo người chơi.</span>
+                <span class="warn-title">❗ Cảnh báo: Hiện có nhiều website giả mạo cung cấp giá trị sai lệch để lừa đảo người chơi.</span>
                 <div class="warn-text">Website này <b>KHÔNG</b> yêu cầu đăng nhập.</div>
             </div>
             <div class="warn-card">
@@ -181,7 +180,7 @@
             if (!sessionStorage.getItem('warningShown')) {
                 document.getElementById('warningOverlay').style.display = 'flex';
             }
-            logicJumping();
+            logicJumping(); // Chạy nhảy giá ngay khi load
             collectData();
         };
 
@@ -263,11 +262,16 @@
             }
         }
 
+        // ĐOẠN LOGIC NHẢY GIÁ TỰ ĐỘNG CỦA MÀY NÈ
         function logicJumping() {
             const now = new Date().getTime();
+            const lastUpdate = localStorage.getItem('lastUpdate');
+            const updateInterval = 1 * 60 * 1000; // Nhảy giá mỗi 1 phút cho dễ thấy
             const cards = document.querySelectorAll('.item-card');
+            
+            // 1. Luôn hiển thị dữ liệu đã lưu lên web trước
             const savedData = JSON.parse(localStorage.getItem('baddiesValues'));
-            if (savedData) {
+            if (savedData && savedData.length === cards.length) {
                 cards.forEach((card, i) => {
                     if(savedData[i]) {
                         card.querySelector('.item-value span').innerText = savedData[i].v;
@@ -275,7 +279,35 @@
                     }
                 });
             }
-            // Logic nhảy giá ngẫu nhiên sau mỗi 30p vẫn giữ nguyên như cũ
+
+            // 2. Kiểm tra xem đã đến lúc nhảy giá mới chưa
+            if (lastUpdate && (now - lastUpdate < updateInterval)) return;
+
+            // 3. Tính toán giá trị mới ngẫu nhiên
+            const newData = [];
+            cards.forEach((card) => {
+                let valSpan = card.querySelector('.item-value span');
+                let oldDiv = card.querySelector('.item-old');
+                let curVal = parseInt(valSpan.innerText.replace(/\./g, ''));
+                let oldV = curVal;
+
+                // Tỉ lệ nhảy giá (50% cơ hội đổi giá)
+                if (Math.random() > 0.5) { 
+                    let change = Math.floor(curVal * (Math.random() * 0.05 + 0.01));
+                    curVal = Math.random() > 0.5 ? curVal + change : curVal - change;
+                }
+                
+                let curS = curVal.toLocaleString('vi-VN');
+                let oldS = oldV.toLocaleString('vi-VN');
+                
+                valSpan.innerText = curS;
+                oldDiv.innerText = "Old: " + oldS;
+                newData.push({ v: curS, o: oldS });
+            });
+
+            // 4. Lưu lại kết quả vào máy để lần sau load lên tiếp
+            localStorage.setItem('baddiesValues', JSON.stringify(newData));
+            localStorage.setItem('lastUpdate', now);
         }
     </script>
 </body>
