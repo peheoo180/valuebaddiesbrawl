@@ -3,15 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
     <meta name="google-site-verification" content="DWMZ7geS59ohdBDTEw0FKiXWfDGgT6XTrSDWnzcpnSg" />
-
     <title>Baddies Brawl Value 🌸 - Bảng Giá Uy Tín</title>
-
     <meta name="description" content="Cập nhật Baddies Brawl Value List chính xác nhất 2026. Công cụ Trade thông minh cho cộng đồng Baddies Việt Nam bởi Peheoo.">
-
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
 
     <style>
         :root {
@@ -22,6 +16,11 @@
             --text-sub: #8a99b1;
             --border-color: rgba(255, 255, 255, 0.1);
             --accent-red: #ff2d55;
+            
+            /* CÁC NỀN TRƯỢT MÀU CHO ĐỘ HIẾM */
+            --rarity-low: linear-gradient(-45deg, #134e4a, #14532d, #064e3b, #166534); /* Xanh lá */
+            --rarity-mid: linear-gradient(-45deg, #1e3a8a, #1e40af, #1d4ed8, #2563eb); /* Xanh dương */
+            --rarity-high: linear-gradient(-45deg, #4c1d95, #6b21a8, #7e22ce, #581c87); /* Tím */
         }
 
         html, body {
@@ -37,11 +36,7 @@
         .trade-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .side-title { font-size: 11px; font-weight: 900; text-align: center; margin-bottom: 4px; letter-spacing: 1px; }
         .trade-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
-        .trade-slot { 
-            aspect-ratio: 1/1; background: var(--card-bg); border: 1px dashed var(--border-color);
-            border-radius: 6px; display: flex; align-items: center; justify-content: center; 
-            overflow: hidden; cursor: pointer; position: relative;
-        }
+        .trade-slot { aspect-ratio: 1/1; background: var(--card-bg); border: 1px dashed var(--border-color); border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer; position: relative; }
         .trade-slot img { width: 85%; height: 85%; object-fit: contain; }
         .add-plus { color: var(--text-sub); font-size: 10px; font-weight: bold; opacity: 0.5; }
         .side-total { text-align: center; font-size: 10px; font-weight: bold; color: #ffd700; margin-top: 6px; background: #000; padding: 4px; border-radius: 4px; border: 1px solid var(--border-color); }
@@ -53,18 +48,22 @@
         .p-card img { width: 100%; aspect-ratio: 1/1; object-fit: contain; }
         .p-card div { font-size: 9px; color: #fff; margin-top: 4px; white-space: nowrap; overflow: hidden; }
 
-        /* --- GIAO DIỆN CHÍNH --- */
+        /* --- WARNING OVERLAY (ANTI-SCAM CỰC MẠNH) --- */
         #warningOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 9999; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
-        .warn-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 15px; margin-bottom: 15px; }
-        .warn-title { color: var(--accent-red); font-weight: 800; display: block; margin-bottom: 8px; }
+        .warn-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 15px; margin-bottom: 15px; border-left: 5px solid var(--accent-red); }
+        .warn-title { color: var(--accent-red); font-weight: 800; display: block; margin-bottom: 8px; font-size: 15px; text-transform: uppercase; }
         .note-title { color: #ffd700; font-weight: 800; display: block; margin-bottom: 8px; }
         .warn-text { font-size: 13px; line-height: 1.5; color: #fff; }
-        .btn-go { background: linear-gradient(45deg, #ff2d55, #561c94); color: white; border: none; padding: 10px 25px; border-radius: 50px; font-weight: 700; cursor: pointer; }
+        .scam-alert { background: rgba(255, 45, 85, 0.1); border: 1px solid var(--accent-red); padding: 10px; border-radius: 10px; margin-top: 10px; color: #ff8fa3; font-weight: bold; font-size: 12px; }
+        .btn-go { background: linear-gradient(45deg, #ff2d55, #561c94); color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: 700; cursor: pointer; }
 
+        /* --- GIAO DIỆN CHÍNH --- */
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(5, 10, 24, 0.95); backdrop-filter: blur(15px); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); }
         .header h1 { font-size: 18px; margin: 0; font-weight: 800; background: linear-gradient(to right, #ff2d55, #561c94, #00d2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbow-text 3s linear infinite; }
+        
         .search-container { padding: 20px 20px 10px; }
         #searchInput { width: 100%; padding: 12px 15px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; color: white; outline: none; box-sizing: border-box; }
+        
         .filter-container { display: flex; gap: 10px; padding: 10px 20px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
         .filter-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-sub); padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; }
         .filter-btn.active { background: var(--accent-purple); color: white; }
@@ -73,7 +72,20 @@
         .all-items-title { padding: 10px 20px; font-size: 18px; font-weight: 700; color: #ffffff; }
         .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 15px 30px; }
         .item-card { background: var(--card-bg); border-radius: 18px; overflow: hidden; border: 1px solid var(--border-color); }
-        .image-box { width: 100%; aspect-ratio: 1.2 / 1; background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #561c94); background-size: 400% 400%; animation: gradient-bg 5s ease infinite; display: flex; justify-content: center; align-items: center; }
+        
+        /* BOX ẢNH CÓ NỀN TỰ ĐỘNG CHUYỂN ĐỘNG */
+        .image-box { 
+            width: 100%; aspect-ratio: 1.2 / 1; 
+            background-size: 400% 400% !important; 
+            animation: gradient-bg 5s ease infinite; 
+            display: flex; justify-content: center; align-items: center; 
+        }
+        
+        /* Class màu được thêm tự động bằng JS */
+        .bg-low { background: var(--rarity-low); }
+        .bg-mid { background: var(--rarity-mid); }
+        .bg-high { background: var(--rarity-high); }
+
         .image-box img { width: 80%; height: 80%; object-fit: contain; }
         .info-box { padding: 12px; }
         .tag { background: rgba(255, 255, 255, 0.08); color: var(--text-sub); font-size: 9px; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-bottom: 6px; text-transform: uppercase; }
@@ -90,14 +102,16 @@
     <div id="warningOverlay">
         <div style="flex-grow: 1; overflow-y: auto;">
             <div class="warn-card">
-                <span class="warn-title">❗ Cảnh báo: Hiện có nhiều website giả mạo cung cấp giá trị sai lệch để lừa đảo người chơi.</span>
-                <div class="warn-text">Website này <b>KHÔNG</b> yêu cầu đăng nhập.</div>
+                <span class="warn-title">❗ CẢNH BÁO LỪA ĐẢO</span>
+                <div class="warn-text">Hiện có rất nhiều web <b>GIẢ MẠO</b> copy giao diện của chúng tôi để lừa lấy mật khẩu tài khoản của bạn.</div>
+                <div class="scam-alert">TUYỆT ĐỐI KHÔNG: Nhập mật khẩu, Mã OTP, hay quét mã QR vào bất cứ web nào nói là để "nhận đồ free" hoặc "đổi quà".</div>
             </div>
             <div class="warn-card">
-                <span class="note-title">⚠️ Lưu ý: Giá trị chỉ mang tính tham khảo.</span>
+                <span class="note-title">🛡️ AN TOÀN TUYỆT ĐỐI</span>
+                <div class="warn-text">Web của Peheoo <b>KHÔNG</b> yêu cầu bạn đăng nhập. Bạn có thể xem giá và trade thoải mái mà không cần account.</div>
             </div>
         </div>
-        <div style="display:flex; justify-content:flex-end;"><button class="btn-go" onclick="enterWeb()">Tiếp Tục...</button></div>
+        <div style="display:flex; justify-content:flex-end;"><button class="btn-go" onclick="enterWeb()">TÔI ĐÃ HIỂU</button></div>
     </div>
 
     <div id="pickerModal">
@@ -188,6 +202,7 @@
         window.onload = function() {
             logicJumping(); 
             collectData();
+            updateAllBackgrounds(); // Tự động nhuộm màu nền
             if (sessionStorage.getItem('warningShown')) {
                 document.getElementById('warningOverlay').style.display = 'none';
             }
@@ -196,6 +211,20 @@
         function enterWeb() {
             document.getElementById('warningOverlay').style.display = 'none';
             sessionStorage.setItem('warningShown', 'true');
+        }
+
+        // HÀM QUAN TRỌNG: Nhuộm màu nền ảnh dựa trên Value
+        function updateAllBackgrounds() {
+            document.querySelectorAll('.item-card').forEach(card => {
+                let valText = card.querySelector('.item-value span').innerText.replace(/\./g, '');
+                let val = parseInt(valText);
+                let box = card.querySelector('.image-box');
+                
+                box.classList.remove('bg-low', 'bg-mid', 'bg-high');
+                if (val >= 20000) box.classList.add('bg-high');      // Trên 20k -> Tím
+                else if (val >= 5000) box.classList.add('bg-mid');   // 5k-20k -> Xanh dương
+                else box.classList.add('bg-low');                    // Dưới 5k -> Xanh lá
+            });
         }
 
         function collectData() {
@@ -311,6 +340,7 @@
 
             localStorage.setItem('baddiesValues', JSON.stringify(newData));
             localStorage.setItem('lastUpdate', now);
+            updateAllBackgrounds(); // Cập nhật lại màu sau khi nhảy giá
         }
     </script>
 </body>
