@@ -260,16 +260,23 @@
         let listItemsData = [];
 
         window.onload = function() {
-            // ĐÃ XÓA logicJumping ĐỂ GIÁ ĐỨNG YÊN
             collectData();
-            updateAllBackgrounds(); 
+            // Delay nhẹ để đảm bảo DOM đã render xong hết rồi mới quét màu
+            setTimeout(() => {
+                updateAllBackgrounds(); 
+            }, 100); 
         };
 
         function updateAllBackgrounds() {
             document.querySelectorAll('.item-card').forEach(card => {
-                let valText = card.querySelector('.item-value span').innerText.replace(/\./g, '');
+                let valSpan = card.querySelector('.item-value span');
+                if (!valSpan) return;
+                
+                let valText = valSpan.innerText.replace(/\./g, '');
                 let val = parseInt(valText);
                 let box = card.querySelector('.image-box');
+                if (!box) return;
+
                 box.classList.remove('bg-low', 'bg-mid', 'bg-high');
                 if (val >= 20000) box.classList.add('bg-high');
                 else if (val >= 5000) box.classList.add('bg-mid');
