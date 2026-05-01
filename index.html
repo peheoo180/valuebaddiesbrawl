@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Baddies Brawl Value 🌸</title>
+    
+    <meta name="google-site-verification" content="DWMZ7geS59ohdBDTEw0FKiXWfDGgT6XTrSDWnzcpnSg" />
+
+    <title>Baddies Brawl Value 🌸 - Bảng Giá Uy Tín</title>
     <style>
         :root {
             --bg-dark: #050a18;
@@ -45,7 +48,7 @@
         .p-card div { font-size: 9px; color: #fff; margin-top: 4px; white-space: nowrap; overflow: hidden; }
 
         /* --- GIAO DIỆN CHÍNH --- */
-        #warningOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 9999; display: none; flex-direction: column; padding: 20px; box-sizing: border-box; }
+        #warningOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 9999; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
         .warn-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 15px; margin-bottom: 15px; }
         .warn-title { color: var(--accent-red); font-weight: 800; display: block; margin-bottom: 8px; }
         .note-title { color: #ffd700; font-weight: 800; display: block; margin-bottom: 8px; }
@@ -177,11 +180,12 @@
         let listItemsData = [];
 
         window.onload = function() {
-            if (!sessionStorage.getItem('warningShown')) {
-                document.getElementById('warningOverlay').style.display = 'flex';
-            }
-            logicJumping(); // Chạy nhảy giá ngay khi load
+            logicJumping(); 
             collectData();
+            // Tự động kiểm tra nếu đã xem warning
+            if (sessionStorage.getItem('warningShown')) {
+                document.getElementById('warningOverlay').style.display = 'none';
+            }
         };
 
         function enterWeb() {
@@ -262,14 +266,12 @@
             }
         }
 
-        // ĐOẠN LOGIC NHẢY GIÁ TỰ ĐỘNG CỦA MÀY NÈ
         function logicJumping() {
             const now = new Date().getTime();
             const lastUpdate = localStorage.getItem('lastUpdate');
-            const updateInterval = 100 * 60 * 1000; // Nhảy giá mỗi 1 phút cho dễ thấy
+            const updateInterval = 60 * 60 * 1000; // Nhảy giá mỗi 1 tiếng (60 phút)
             const cards = document.querySelectorAll('.item-card');
             
-            // 1. Luôn hiển thị dữ liệu đã lưu lên web trước
             const savedData = JSON.parse(localStorage.getItem('baddiesValues'));
             if (savedData && savedData.length === cards.length) {
                 cards.forEach((card, i) => {
@@ -280,10 +282,8 @@
                 });
             }
 
-            // 2. Kiểm tra xem đã đến lúc nhảy giá mới chưa
             if (lastUpdate && (now - lastUpdate < updateInterval)) return;
 
-            // 3. Tính toán giá trị mới ngẫu nhiên
             const newData = [];
             cards.forEach((card) => {
                 let valSpan = card.querySelector('.item-value span');
@@ -291,7 +291,6 @@
                 let curVal = parseInt(valSpan.innerText.replace(/\./g, ''));
                 let oldV = curVal;
 
-                // Tỉ lệ nhảy giá (50% cơ hội đổi giá)
                 if (Math.random() > 0.5) { 
                     let change = Math.floor(curVal * (Math.random() * 0.04 + 0.01));
                     curVal = Math.random() > 0.5 ? curVal + change : curVal - change;
@@ -305,7 +304,6 @@
                 newData.push({ v: curS, o: oldS });
             });
 
-            // 4. Lưu lại kết quả vào máy để lần sau load lên tiếp
             localStorage.setItem('baddiesValues', JSON.stringify(newData));
             localStorage.setItem('lastUpdate', now);
         }
