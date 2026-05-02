@@ -40,7 +40,6 @@
             overflow-x: hidden;
         }
 
-        /* --- HEADER MỚI: TRẮNG HỒNG & HOA ANH ĐÀO --- */
         .header { 
             position: sticky; top: 0; z-index: 1000; 
             background: rgba(5, 10, 24, 0.85); 
@@ -54,7 +53,6 @@
         
         .header h1 { 
             font-size: 16px; margin: 0; font-weight: 800; letter-spacing: 0.5px;
-            /* Đổi sang màu trắng pha hồng nhạt cực sang */
             color: #fff5f7;
             text-shadow: 0 0 10px rgba(255, 182, 193, 0.6);
             display: flex;
@@ -62,7 +60,6 @@
             gap: 5px;
         }
 
-        /* Hiệu ứng hoa anh đào tự động rơi */
         .sakura-petal {
             position: fixed;
             z-index: 9999;
@@ -90,7 +87,6 @@
         .v-text { font-size: 10px; color: var(--accent-green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
         .v-sub { font-size: 10px; color: #fff; opacity: 0.8; font-weight: 400; margin-left: 2px; }
 
-        /* --- TRADE SECTION --- */
         .trade-section { display: none; padding: 10px; background: rgba(0,0,0,0.3); border-bottom: 2px solid var(--accent-purple); }
         .trade-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .side-title { font-size: 11px; font-weight: 900; text-align: center; margin-bottom: 4px; letter-spacing: 1px; }
@@ -126,14 +122,16 @@
         
         .image-box { 
             width: 100%; aspect-ratio: 1.2 / 1; 
+            background: #1a1a1a; 
             background-size: 400% 400% !important; 
             animation: gradient-bg 5s ease infinite; 
-            display: flex; justify-content: center; align-items: center; 
+            display: flex; justify-content: center; align-items: center;
+            transition: background 0.3s ease;
         }
         
-        .bg-low { background: var(--rarity-low); }
-        .bg-mid { background: var(--rarity-mid); }
-        .bg-high { background: var(--rarity-high); }
+        .bg-low { background: var(--rarity-low) !important; }
+        .bg-mid { background: var(--rarity-mid) !important; }
+        .bg-high { background: var(--rarity-high) !important; }
 
         .image-box img { width: 80%; height: 80%; object-fit: contain; }
         .info-box { padding: 12px; }
@@ -235,36 +233,36 @@
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499177426880692306/e3975e9e1f49870cc17111d5fa93f719.png?ex=69f3d947&is=69f287c7&hm=8632c9c4df371827e01387f1de6e8f29aac08f215786c0723f1b14aa1f954047&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Zombie Style</div><div class="item-value">Value: <span>12.900</span></div><div class="item-old">Old: 9.980</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499177387101913138/7e891b57300ffb2641afabba87474283.png?ex=69f3d93e&is=69f287be&hm=58399fec650887b09d24832ecab659b5361ad6ecd0f1bf0a4b5fccdabfc4075c&"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">Ghost</div><div class="item-value">Value: <span>17.000</span></div><div class="item-old">Old: -</div></div></div>
 
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 1</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499951043746725888/Screenshot_20260502-084851.png?ex=69f6a9c4&is=69f55844&hm=0508ff2f14beb2bc6e2fa69dfc3ef955382fdde6b5750f6e82e478429d63ac56&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Bunny Style</div><div class="item-value">Value: <span>-</span></div><div class="item-old">Old: -</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 2</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 3</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 4</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 5</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 6</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 7</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 8</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 9</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 10</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 11</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 12</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 13</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 14</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 15</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 6</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 7</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 8</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 9</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 10</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 11</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 12</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 13</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 14</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 15</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 16</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 17</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 18</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 19</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 20</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 21</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 22</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 23</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 24</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 25</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 26</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 27</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 28</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 29</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 30</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 21</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 22</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 23</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 24</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 25</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 26</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 27</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 28</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 29</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
+            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 30</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
         </div>
     </div>
 
@@ -274,17 +272,15 @@
         let listItemsData = [];
 
         window.onload = function() {
+            updateAllBackgrounds(); 
             collectData();
-            setTimeout(() => {
-                updateAllBackgrounds(); 
-            }, 100);
-            
-            // TỰ ĐỘNG RƠI HOA SAU MỖI 3 GIÂY (Cho nó liên tục và đẹp)
+            spawnSakura();
             setInterval(spawnSakura, 3000); 
         };
 
         function spawnSakura() {
-            for(let i=0; i<15; i++) {
+            const petalCount = 15;
+            for(let i=0; i<petalCount; i++) {
                 const petal = document.createElement('div');
                 petal.className = 'sakura-petal';
                 petal.innerText = '🌸';
@@ -293,21 +289,17 @@
                 petal.style.opacity = Math.random();
                 petal.style.fontSize = (Math.random() * 10 + 10) + 'px';
                 document.body.appendChild(petal);
-                
                 setTimeout(() => { petal.remove(); }, 7000);
             }
         }
 
         function updateAllBackgrounds() {
-            document.querySelectorAll('.item-card').forEach(card => {
-                let valSpan = card.querySelector('.item-value span');
-                if (!valSpan) return;
-                
-                let valText = valSpan.innerText.replace(/\./g, '');
-                let val = parseInt(valText);
-                let box = card.querySelector('.image-box');
-                if (!box) return;
-
+            const cards = document.querySelectorAll('.item-card');
+            cards.forEach(card => {
+                const valSpan = card.querySelector('.item-value span');
+                const box = card.querySelector('.image-box');
+                if (!valSpan || !box) return;
+                const val = parseInt(valSpan.innerText.replace(/\./g, '')) || 0;
                 box.classList.remove('bg-low', 'bg-mid', 'bg-high');
                 if (val >= 20000) box.classList.add('bg-high');
                 else if (val >= 5000) box.classList.add('bg-mid');
@@ -359,7 +351,7 @@
             ['You', 'Them'].forEach(s => {
                 let total = 0;
                 document.querySelectorAll(`#grid${s} .v-val`).forEach(v => {
-                    total += parseInt(v.innerText.replace(/\./g, ''));
+                    total += parseInt(v.innerText.replace(/\./g, '')) || 0;
                 });
                 document.getElementById(`total${s}`).innerText = total.toLocaleString('vi-VN');
             });
