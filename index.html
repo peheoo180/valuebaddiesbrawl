@@ -40,7 +40,7 @@
             overflow-x: hidden;
         }
 
-        /* --- HEADER CẦU VỒNG 🌸 --- */
+        /* --- HEADER & ANIMATION CHILL --- */
         .header { 
             position: sticky; top: 0; z-index: 1000; 
             background: rgba(5, 10, 24, 0.85); 
@@ -50,8 +50,27 @@
             display: flex; flex-direction: column; gap: 8px;
         }
         
-        .header-top { display: flex; justify-content: space-between; align-items: center; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; position: relative; }
         
+        .brand-wrapper { display: flex; align-items: flex-end; gap: 8px; position: relative; }
+
+        .sakura-tree-box {
+            width: 45px; height: 45px; position: relative;
+            background: url('https://cdn-icons-png.flaticon.com/512/3233/3233514.png') no-repeat center;
+            background-size: contain;
+            animation: tree-sway 5s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+
+        .girl-mini {
+            width: 18px; height: 18px; position: absolute; bottom: 0; left: 14px;
+            background: url('https://cdn-icons-png.flaticon.com/512/6994/6994781.png') no-repeat center;
+            background-size: contain;
+            transition: transform 0.6s ease;
+        }
+
+        .sakura-falling .girl-mini { transform: translateY(-4px) scaleX(-1); } /* Đổi hướng tay khi hứng hoa */
+
         .header h1 { 
             font-size: 16px; margin: 0; font-weight: 800; letter-spacing: 0.5px;
             background: linear-gradient(to right, #ff2d55, #ffcc00, #00ff88, #00d2ff, #cc00ff, #ff2d55);
@@ -59,11 +78,28 @@
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent;
             animation: rainbow-flow 3s linear infinite;
+            transition: all 1s ease;
         }
 
-        @keyframes rainbow-flow {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
+        /* Khi hoa rơi: Đổi sang màu hồng nhạt và hiệu ứng bóng mờ */
+        .sakura-falling h1 {
+            background: linear-gradient(to right, #ffd1dc, #ff91af, #ffd1dc) !important;
+            -webkit-background-clip: text !important;
+            filter: drop-shadow(0 0 5px rgba(255, 145, 175, 0.6));
+        }
+
+        @keyframes tree-sway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+        @keyframes rainbow-flow { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+
+        .petal {
+            position: absolute; background: #ffd1dc; border-radius: 150% 0 150% 0;
+            opacity: 0; pointer-events: none; z-index: 999;
+            animation: petal-fall linear forwards;
+        }
+        @keyframes petal-fall {
+            0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(120px) rotate(450deg); opacity: 0; }
         }
 
         .verified-badge {
@@ -76,7 +112,7 @@
         .v-text { font-size: 10px; color: var(--accent-green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
         .v-sub { font-size: 10px; color: #fff; opacity: 0.8; font-weight: 400; margin-left: 2px; }
 
-        /* --- TRADE SECTION --- */
+        /* --- PHẦN CÒN LẠI CỦA CSS GIỮ NGUYÊN --- */
         .trade-section { display: none; padding: 10px; background: rgba(0,0,0,0.3); border-bottom: 2px solid var(--accent-purple); }
         .trade-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .side-title { font-size: 11px; font-weight: 900; text-align: center; margin-bottom: 4px; letter-spacing: 1px; }
@@ -85,49 +121,31 @@
         .trade-slot img { width: 85%; height: 85%; object-fit: contain; }
         .add-plus { color: var(--text-sub); font-size: 10px; font-weight: bold; opacity: 0.5; }
         .side-total { text-align: center; font-size: 10px; font-weight: bold; color: #ffd700; margin-top: 6px; background: #000; padding: 4px; border-radius: 4px; border: 1px solid var(--border-color); }
-
         #pickerModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 10000; display: none; flex-direction: column; padding: 15px; box-sizing: border-box; }
         .picker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; overflow-y: auto; padding-bottom: 20px; }
         .p-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 5px; text-align: center; }
         .p-card img { width: 100%; aspect-ratio: 1/1; object-fit: contain; }
         .p-card div { font-size: 9px; color: #fff; margin-top: 4px; white-space: nowrap; overflow: hidden; }
-
         .search-container { padding: 15px 20px 5px; }
-        #searchInput { 
-            width: 100%; padding: 12px 18px; 
-            background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid var(--border-color); 
-            border-radius: 12px; color: white; outline: none; box-sizing: border-box; 
-        }
+        #searchInput { width: 100%; padding: 12px 18px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 12px; color: white; outline: none; box-sizing: border-box; }
         #searchInput:focus { border-color: var(--accent-purple); background: rgba(255, 255, 255, 0.06); }
-        
         .filter-container { display: flex; gap: 10px; padding: 10px 20px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
         .filter-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-sub); padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; }
         .filter-btn.active { background: var(--accent-purple); color: white; }
         .btn-trade-toggle { background: var(--accent-red) !important; color: white !important; border: none !important; }
-
         .all-items-title { padding: 10px 20px; font-size: 18px; font-weight: 700; color: #ffffff; }
         .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 15px 30px; }
         .item-card { background: var(--card-bg); border-radius: 18px; overflow: hidden; border: 1px solid var(--border-color); }
-        
-        .image-box { 
-            width: 100%; aspect-ratio: 1.2 / 1; 
-            background-size: 400% 400% !important; 
-            animation: gradient-bg 5s ease infinite; 
-            display: flex; justify-content: center; align-items: center; 
-        }
-        
+        .image-box { width: 100%; aspect-ratio: 1.2 / 1; background-size: 400% 400% !important; animation: gradient-bg 5s ease infinite; display: flex; justify-content: center; align-items: center; }
         .bg-low { background: var(--rarity-low); }
         .bg-mid { background: var(--rarity-mid); }
         .bg-high { background: var(--rarity-high); }
-
         .image-box img { width: 80%; height: 80%; object-fit: contain; }
         .info-box { padding: 12px; }
         .tag { background: rgba(255, 255, 255, 0.08); color: var(--text-sub); font-size: 9px; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-bottom: 6px; text-transform: uppercase; }
         .item-name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .item-value span { color: #ffd700; font-weight: 600; }
         .item-old { font-size: 11px; color: #ff2d55; font-weight: 600; }
-
         @keyframes gradient-bg { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
     </style>
 </head>
@@ -143,8 +161,13 @@
 
     <div id="mainContent">
         <div class="header">
-            <div class="header-top">
-                <h1>BADDIES BRAWL VALUE 🌸</h1>
+            <div class="header-top" id="headerScene">
+                <div class="brand-wrapper">
+                    <div class="sakura-tree-box">
+                        <div class="girl-mini"></div>
+                    </div>
+                    <h1>BADDIES BRAWL VALUE 🌸</h1>
+                </div>
                 <div style="opacity: 0.5; font-size: 20px;">☰</div>
             </div>
             <div class="verified-badge">
@@ -220,37 +243,6 @@
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499017073832100011/e3975e9e1f49870cc17111d5fa93f719_2.png?ex=69f343f0&is=69f1f270&hm=351efe4316d360f3c19e86417760ccb989cb566200bb8b6ebe5c9acd168bbd6e&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Witch Style</div><div class="item-value">Value: <span>12.900</span></div><div class="item-old">Old: 20.000</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499177426880692306/e3975e9e1f49870cc17111d5fa93f719.png?ex=69f3d947&is=69f287c7&hm=8632c9c4df371827e01387f1de6e8f29aac08f215786c0723f1b14aa1f954047&"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">Zombie Style</div><div class="item-value">Value: <span>12.900</span></div><div class="item-old">Old: 9.980</div></div></div>
             <div class="item-card"><div class="image-box"><img src="https://cdn.discordapp.com/attachments/1498938855171031142/1499177387101913138/7e891b57300ffb2641afabba87474283.png?ex=69f3d93e&is=69f287be&hm=58399fec650887b09d24832ecab659b5361ad6ecd0f1bf0a4b5fccdabfc4075c&"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">Ghost</div><div class="item-value">Value: <span>17.000</span></div><div class="item-old">Old: -</div></div></div>
-
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 1</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 2</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 3</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 4</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 5</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 6</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 7</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 8</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 9</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 10</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 11</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 12</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 13</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 14</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 15</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 16</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 17</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 18</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 19</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Style</span><div class="item-name">New Item 20</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 21</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 22</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 23</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 24</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Skin</span><div class="item-name">New Item 25</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 26</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 27</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 28</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 29</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
-            <div class="item-card"><div class="image-box"><img src="https://via.placeholder.com/150"></div><div class="info-box"><span class="tag">Aura</span><div class="item-name">New Item 30</div><div class="item-value">Value: <span>1.000</span></div><div class="item-old">Old: -</div></div></div>
         </div>
     </div>
 
@@ -261,22 +253,47 @@
 
         window.onload = function() {
             collectData();
-            // Delay nhẹ để đảm bảo DOM đã render xong hết rồi mới quét màu
-            setTimeout(() => {
-                updateAllBackgrounds(); 
-            }, 100); 
+            setTimeout(() => { updateAllBackgrounds(); }, 100); 
+            startSakuraEffect(); // Chạy hiệu ứng hoa anh đào
         };
 
+        // HIỆU ỨNG HOA ANH ĐÀO (Mỗi 30s)
+        function startSakuraEffect() {
+            setInterval(() => {
+                const scene = document.getElementById('headerScene');
+                scene.classList.add('sakura-falling');
+
+                // Tạo cơn mưa hoa
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        const petal = document.createElement('div');
+                        petal.className = 'petal';
+                        petal.style.left = (Math.random() * 200) + 'px';
+                        petal.style.width = (Math.random() * 6 + 4) + 'px';
+                        petal.style.height = petal.style.width;
+                        petal.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                        scene.appendChild(petal);
+                        setTimeout(() => petal.remove(), 4000);
+                    }, i * 200);
+                }
+
+                // Sau 6s thì dừng hứng hoa và chữ về màu cũ
+                setTimeout(() => {
+                    scene.classList.remove('sakura-falling');
+                }, 6000);
+
+            }, 30000); 
+        }
+
+        /* --- CÁC HÀM LOGIC CŨ GIỮ NGUYÊN --- */
         function updateAllBackgrounds() {
             document.querySelectorAll('.item-card').forEach(card => {
                 let valSpan = card.querySelector('.item-value span');
                 if (!valSpan) return;
-                
                 let valText = valSpan.innerText.replace(/\./g, '');
                 let val = parseInt(valText);
                 let box = card.querySelector('.image-box');
                 if (!box) return;
-
                 box.classList.remove('bg-low', 'bg-mid', 'bg-high');
                 if (val >= 20000) box.classList.add('bg-high');
                 else if (val >= 5000) box.classList.add('bg-mid');
